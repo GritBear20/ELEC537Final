@@ -1,0 +1,169 @@
+1 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
+2 /*
+3  * Copyright (c) 2010 IITP RAS
+4  *
+5  * This program is free software; you can redistribute it and/or modify
+6  * it under the terms of the GNU General Public License version 2 as
+7  * published by the Free Software Foundation;
+8  *
+9  * This program is distributed in the hope that it will be useful,
+10  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+11  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+12  * GNU General Public License for more details.
+13  *
+14  * You should have received a copy of the GNU General Public License
+15  * along with this program; if not, write to the Free Software
+16  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+17  *
+18  * Authors: Pavel Boyko <boyko@iitp.ru>
+19  */
+20 
+21 /*
+22  * Classical hidden terminal problem and its RTS/CTS solution.
+23  *
+24  * Topology: [node 0] <-- -50 dB --> [node 1] <-- -50 dB --> [node 2]
+25  *
+26  * This example illustrates the use of
+27  * - Wifi in ad-hoc mode
+28  * - Matrix propagation loss model
+29  * - Use of OnOffApplication to generate CBR stream
+30  * - IP flow monitor
+31  */
+32 #include "ns3/core-module.h"
+33 #include "ns3/propagation-module.h"
+34 #include "ns3/network-module.h"
+35 #include "ns3/applications-module.h"
+36 #include "ns3/mobility-module.h"
+37 #include "ns3/internet-module.h"
+38 #include "ns3/flow-monitor-module.h"
+39 #include "ns3/wifi-module.h"
+40 
+41 using namespace ns3;
+42 
+44 void experiment (bool enableCtsRts)
+45 {
+46  // 0. Enable or disable CTS/RTS
+47  UintegerValue ctsThr = (enableCtsRts ? UintegerValue (100) : UintegerValue (2200));
+48  Config::SetDefault ("ns3::WifiRemoteStationManager::RtsCtsThreshold", ctsThr);
+49 
+50  // 1. Create 3 nodes
+51  NodeContainer nodes;
+52  nodes.Create (3);
+53 
+54  // 2. Place nodes somehow, this is required by every wireless simulation
+55  for (size_t i = 0; i < 3; ++i)
+56  {
+57  nodes.Get (i)->AggregateObject (CreateObject<ConstantPositionMobilityModel> ());
+58  }
+59 
+60  // 3. Create propagation loss matrix
+61  Ptr<MatrixPropagationLossModel> lossModel = CreateObject<MatrixPropagationLossModel> ();
+62  lossModel->SetDefaultLoss (200); // set default loss to 200 dB (no link)
+63  lossModel->SetLoss (nodes.Get (0)->GetObject<MobilityModel>(), nodes.Get (1)->GetObject<MobilityModel>(), 50); // set symmetric loss 0 <-> 1 to 50 dB
+64  lossModel->SetLoss (nodes.Get (2)->GetObject<MobilityModel>(), nodes.Get (1)->GetObject<MobilityModel>(), 50); // set symmetric loss 2 <-> 1 to 50 dB
+65 
+66  // 4. Create & setup wifi channel
+67  Ptr<YansWifiChannel> wifiChannel = CreateObject <YansWifiChannel> ();
+68  wifiChannel->SetPropagationLossModel (lossModel);
+69  wifiChannel->SetPropagationDelayModel (CreateObject <ConstantSpeedPropagationDelayModel> ());
+70 
+71  // 5. Install wireless devices
+72  WifiHelper wifi;
+73  wifi.SetStandard (WIFI_PHY_STANDARD_80211b);
+74  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
+75  "DataMode",StringValue ("DsssRate2Mbps"),
+76  "ControlMode",StringValue ("DsssRate1Mbps"));
+77  YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
+78  wifiPhy.SetChannel (wifiChannel);
+79  NqosWifiMacHelper wifiMac = NqosWifiMacHelper::Default ();
+80  wifiMac.SetType ("ns3::AdhocWifiMac"); // use ad-hoc MAC
+81  NetDeviceContainer devices = wifi.Install (wifiPhy, wifiMac, nodes);
+82 
+83  // uncomment the following to have athstats output
+84  // AthstatsHelper athstats;
+85  // athstats.EnableAthstats(enableCtsRts ? "basic-athstats-node" : "rtscts-athstats-node", nodes);
+86 
+87  // uncomment the following to have pcap output
+88  //wifiPhy.EnablePcap (enableCtsRts ? "basic-pcap-node" : "rtscts-pcap-node", nodes);
+89 
+90 
+91  // 6. Install TCP/IP stack & assign IP addresses
+92  InternetStackHelper internet;
+93  internet.Install (nodes);
+94  Ipv4AddressHelper ipv4;
+95  ipv4.SetBase ("10.0.0.0", "255.0.0.0");
+96  ipv4.Assign (devices);
+97 
+98  // 7. Install applications: two CBR streams each saturating the channel
+99  ApplicationContainer cbrApps;
+100  uint16_t cbrPort = 12345;
+101  OnOffHelper onOffHelper ("ns3::UdpSocketFactory", InetSocketAddress (Ipv4Address ("10.0.0.2"), cbrPort));
+102  onOffHelper.SetAttribute ("PacketSize", UintegerValue (200));
+103  onOffHelper.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
+104  onOffHelper.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
+105 
+106  // flow 1: node 0 -> node 1
+107  onOffHelper.SetAttribute ("DataRate", StringValue ("3000000bps"));
+108  onOffHelper.SetAttribute ("StartTime", TimeValue (Seconds (1.000000)));
+109  cbrApps.Add (onOffHelper.Install (nodes.Get (0)));
+110 
+111  // flow 2: node 2 -> node 1
+116  onOffHelper.SetAttribute ("DataRate", StringValue ("3001100bps"));
+117  onOffHelper.SetAttribute ("StartTime", TimeValue (Seconds (1.001)));
+118  cbrApps.Add (onOffHelper.Install (nodes.Get (2)));
+119 
+125  uint16_t echoPort = 9;
+126  UdpEchoClientHelper echoClientHelper (Ipv4Address ("10.0.0.2"), echoPort);
+127  echoClientHelper.SetAttribute ("MaxPackets", UintegerValue (1));
+128  echoClientHelper.SetAttribute ("Interval", TimeValue (Seconds (0.1)));
+129  echoClientHelper.SetAttribute ("PacketSize", UintegerValue (10));
+130  ApplicationContainer pingApps;
+131 
+132  // again using different start times to workaround Bug 388 and Bug 912
+133  echoClientHelper.SetAttribute ("StartTime", TimeValue (Seconds (0.001)));
+134  pingApps.Add (echoClientHelper.Install (nodes.Get (0)));
+135  echoClientHelper.SetAttribute ("StartTime", TimeValue (Seconds (0.006)));
+136  pingApps.Add (echoClientHelper.Install (nodes.Get (2)));
+137 
+138 
+139 
+140 
+141  // 8. Install FlowMonitor on all nodes
+142  FlowMonitorHelper flowmon;
+143  Ptr<FlowMonitor> monitor = flowmon.InstallAll ();
+144 
+145  // 9. Run simulation for 10 seconds
+146  Simulator::Stop (Seconds (10));
+147  Simulator::Run ();
+148 
+149  // 10. Print per flow statistics
+150  monitor->CheckForLostPackets ();
+151  Ptr<Ipv4FlowClassifier> classifier = DynamicCast<Ipv4FlowClassifier> (flowmon.GetClassifier ());
+152  std::map<FlowId, FlowMonitor::FlowStats> stats = monitor->GetFlowStats ();
+153  for (std::map<FlowId, FlowMonitor::FlowStats>::const_iterator i = stats.begin (); i != stats.end (); ++i)
+154  {
+155  // first 2 FlowIds are for ECHO apps, we don't want to display them
+156  if (i->first > 2)
+157  {
+158  Ipv4FlowClassifier::FiveTuple t = classifier->FindFlow (i->first);
+159  std::cout << "Flow " << i->first - 2 << " (" << t.sourceAddress << " -> " << t.destinationAddress << ")\n";
+160  std::cout << " Tx Bytes: " << i->second.txBytes << "\n";
+161  std::cout << " Rx Bytes: " << i->second.rxBytes << "\n";
+162  std::cout << " Throughput: " << i->second.rxBytes * 8.0 / 10.0 / 1000 / 1000 << " Mbps\n";
+163  }
+164  }
+165 
+166  // 11. Cleanup
+167  Simulator::Destroy ();
+168 }
+169 
+170 int main (int argc, char **argv)
+171 {
+172  std::cout << "Hidden station experiment with RTS/CTS disabled:\n" << std::flush;
+173  experiment (false);
+174  std::cout << "------------------------------------------------\n";
+175  std::cout << "Hidden station experiment with RTS/CTS enabled:\n";
+176  experiment (true);
+177 
+178  return 0;
+179 }
