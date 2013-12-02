@@ -25,7 +25,7 @@
 //  void SetUsingLLTAlgo(bool enable){usingLLTBasedAlgo = enable;}
 //  void SetIsEarliestLLT(bool isEarlist){isEarliestLLT = isEarlist;}
 //  void sendAlreadyWaitedSignal();
-//  and fields...
+//  and field...
 //Lee's modification ends ==========================================================
 
 

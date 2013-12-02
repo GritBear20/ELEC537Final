@@ -26,10 +26,7 @@
 //e.g.
 //  void SetUsingLLTAlgo(bool enable){usingLLTBasedAlgo = enable;}
 //  std::map <Mac48Address, float> * GetLLTMap(){return &aLLTmap;}
-//  void CheckIsEarliest();
-//  void SendIsEarlistSignal();
-//  void SetAlreadyWaited(bool it_alreadyWaited){alreadyWaited = it_alreadyWaited;}
-//  and fields...
+//  and more...
 //Lee's modification ends ==========================================================
 
 

@@ -17,13 +17,6 @@
  *
  * Author: Mathieu Lacage <mathieu.lacage@sophia.inria.fr>
  */
-
-//please look for the following sections
-//Lee's modification starts ========================================================
-//  void EnableLLTAlgo();
-//  void DisableLLTAlgo();
-//Lee's modification ends ==========================================================
-
 #ifndef WIFI_MAC_H
 #define WIFI_MAC_H
 
@@ -51,11 +44,6 @@ class Dcf;
 class WifiMac : public Object
 {
 public:
-//Lee's modification starts ========================================================
-  void EnableLLTAlgo();
-  void DisableLLTAlgo();
-//Lee's modification ends ==========================================================
-
   static TypeId GetTypeId (void);
 
   /**
