@@ -396,7 +396,7 @@ class MacLow : public Object
 public:
 //Lee's modification starts ========================================================
   void SetUsingLLTAlgo(bool enable){usingLLTBasedAlgo = enable;}
-  std::map <Mac48Address, float> * GetLLTMap(){return &aLLTmap;}
+  std::map <Mac48Address, float> * GetLLTMap(){return &LLTmap;}
   void SendIsEarlistSignal(){dcfManager->SetIsEarliestLLT(isEarliestLLT);}
   void SetAlreadyWaited(bool it_alreadyWaited){alreadyWaited = it_alreadyWaited;}
   void SetDcfManager(DcfManager * adcfManager){dcfManager = adcfManager;}
