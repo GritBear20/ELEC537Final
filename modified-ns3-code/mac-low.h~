@@ -557,9 +557,8 @@ private:
   bool isEarliestLLT;
   bool alreadyWaited;
   
-  Time AP_waitingWindow;
-  Time AP_LLTfinished;  
-  Time Client_LLTfinished;
+  Time waitingWindow;
+  Time LLTfinished;
 
   std::map <Mac48Address, long> LLTmap;
 

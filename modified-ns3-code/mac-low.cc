@@ -347,9 +347,7 @@ MacLow::MacLow ()
   tspec->tv_nsec = -1; //initial value
   //LLTmap = new std::map <Mac48Address, float>(); it does not need initialization
   
-  AP_LLTfinished = Simulator::Now();  
-  Client_LLTfinished = Simulator::Now();
-
+  LLTfinished = Simulator::Now();  
 //Lee's modification ends ==========================================================
 }
 
@@ -1781,9 +1779,9 @@ MacLow::SendDataAfterCts (Mac48Address source, Time duration, WifiMode txMode)
 void
 MacLow::WaitSifsAfterEndTx (void)
 {
-//Lee's modification starts ==========================================================
-Client_LLTfinished = Simulator::Now();
-//Lee's modification ends ============================================================
+  //Lee's modification starts ==========================================================
+  LLTfinished = Simulator::Now();
+  //Lee's modification ends ============================================================
 
   m_listener->StartNext ();
 }
@@ -1844,7 +1842,7 @@ MacLow::SendAckAfterData (Mac48Address source, Time duration, WifiMode dataTxMod
   ForwardDown (packet, &ack, ackTxVector, preamble);
 
   //Lee's modification starts ==========================================================
-  AP_LLTfinished = Simulator::Now();
+  LLTfinished = Simulator::Now();
   //Lee's modification ends ============================================================
 }
 
