@@ -187,7 +187,8 @@ public:
 //Lee's modification starts ========================================================
   void SetUsingLLTAlgo(bool enable){usingLLTBasedAlgo = enable;}
   void SetIsEarliestLLT(bool isEarlist){isEarliestLLT = isEarlist;}
-  void sendAlreadyWaitedSignal();
+  void SetMacLow(MacLow * mlow){m_low = mlow;}
+  void sendAlreadyWaitedSignal(){m_low ->SetAlreadyWaited(alreadyWaited);}
 //Lee's modification ends ==========================================================
 
   DcfManager ();
@@ -306,6 +307,10 @@ private:
   bool usingLLTBasedAlgo;
   bool isEarliestLLT;
   bool alreadyWaited;
+
+//by-pass the low listener (fast but non-elegant solution) 
+  MacLow * m_low;
+
 //Lee's modification ends ==========================================================
 
   void UpdateBackoff (void);

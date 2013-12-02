@@ -319,7 +319,6 @@ MacLow::MacLow ()
   isEarlist = false;
   alreadyWaited false;
   LLTmap = new std::map <Mac48Address, float>();
-  dcfManager = NULL;
 //Lee's modification ends ==========================================================
 }
 

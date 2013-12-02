@@ -24,6 +24,21 @@
 
 namespace ns3 {
 
+class WifiMac : public Object
+{
+public:
+//Lee's modification starts ========================================================
+void WifiMac::EnableLLTAlgo(){
+    //set dcf-manager and mac-low LLT algo to true
+
+}
+
+void WifiMac::DisableLLTAlgo(){
+    //set dcf-manager and mac-low LLT algo to false
+
+}
+//Lee's modification ends ==========================================================
+
 NS_OBJECT_ENSURE_REGISTERED (WifiMac);
 
 Time
