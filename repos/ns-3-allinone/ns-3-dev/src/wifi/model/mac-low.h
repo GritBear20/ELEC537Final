@@ -411,7 +411,9 @@ public:
   bool GetIsEarliest(){return isEarliestLLT;}
   void SetAlreadyWaited(bool it_alreadyWaited){alreadyWaited = it_alreadyWaited;}
   
-  void CheckIsEarliest();
+  void CheckAlreadyWaited();
+
+  Mac48Address CheckIsEarliest();
 //Lee's modification ends ==========================================================
 
 
@@ -554,9 +556,15 @@ private:
   bool usingLLTBasedAlgo;
   bool isEarliestLLT;
   bool alreadyWaited;
+  
+  Time AP_waitingWindow;
+  Time AP_LLTfinished;  
+  Time Client_LLTfinished;
+
   std::map <Mac48Address, long> LLTmap;
 
   timespec * tspec;
+  Mac48Address curEarliestLLTAddress;
 
 //Lee's modification ends ==========================================================
 
@@ -608,10 +616,21 @@ private:
   void BlockAckTimeout (void);
   void CtsTimeout (void);
   void SendCtsToSelf (void);
+
+//AP updates LLT time table =======================
   void SendCtsAfterRts (Mac48Address source, Time duration, WifiMode txMode, double rtsSnr);
+//=================================================
+
+//needs to have a signature as AP =================
   void SendAckAfterData (Mac48Address source, Time duration, WifiMode txMode, double rtsSnr);
+//=================================================
+
   void SendDataAfterCts (Mac48Address source, Time duration, WifiMode txMode);
+
+//need to have a sigature as Client ===========
   void WaitSifsAfterEndTx (void);
+//=============================================
+
   void EndTxNoAck (void);
 
   void SendRtsForPacket (void);
