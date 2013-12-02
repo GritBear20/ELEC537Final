@@ -1,17 +1,17 @@
 >>>>>>>>>>>>>>>> []
-/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/src/antenna/bindings/modulegen__gcc_ILP32.py:243: Warning: exception TypeLookupError(['std::_List_const_iterator< ns3::AttributeConstructionList::Item >'],) in wrapper public: retval? ???::Begin (params?) const;
+/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/src/antenna/bindings/modulegen__gcc_ILP32.py:243: Warning: exception TypeLookupError(['std::_List_const_iterator< ns3::AttributeConstructionList::Item >'],) in wrapper public: retval? ???::Begin (params?) const;
   is_const=True)
-/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/src/antenna/bindings/modulegen__gcc_ILP32.py:248: Warning: exception TypeLookupError(['std::_List_const_iterator< ns3::AttributeConstructionList::Item >'],) in wrapper public: retval? ???::End (params?) const;
+/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/src/antenna/bindings/modulegen__gcc_ILP32.py:248: Warning: exception TypeLookupError(['std::_List_const_iterator< ns3::AttributeConstructionList::Item >'],) in wrapper public: retval? ???::End (params?) const;
   is_const=True)
-/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/src/antenna/bindings/modulegen__gcc_ILP32.py:388: Warning: exception TypeConfigurationError('Missing transfer_ownership option',) in wrapper public: retval? ???::Delete (params?);
+/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/src/antenna/bindings/modulegen__gcc_ILP32.py:388: Warning: exception TypeConfigurationError('Missing transfer_ownership option',) in wrapper public: retval? ???::Delete (params?);
   is_static=True)
-/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/src/antenna/bindings/modulegen__gcc_ILP32.py:445: Warning: exception TypeLookupError(['ns3::Callback< ns3::ObjectBase *, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >'],) in wrapper public: retval? ???::GetConstructor (params?) const;
+/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/src/antenna/bindings/modulegen__gcc_ILP32.py:445: Warning: exception TypeLookupError(['ns3::Callback< ns3::ObjectBase *, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >'],) in wrapper public: retval? ???::GetConstructor (params?) const;
   is_const=True)
-/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/src/antenna/bindings/modulegen__gcc_ILP32.py:524: Warning: exception TypeConfigurationError('Missing transfer_ownership option',) in wrapper public: retval? ???::LookupByHashFailSafe (params?);
+/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/src/antenna/bindings/modulegen__gcc_ILP32.py:524: Warning: exception TypeConfigurationError('Missing transfer_ownership option',) in wrapper public: retval? ???::LookupByHashFailSafe (params?);
   is_static=True)
-/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/src/antenna/bindings/modulegen__gcc_ILP32.py:1226: Warning: exception TypeLookupError(['ns3::Hash::Hash32Function_ptr'],) in wrapper <pybindgen.cppmethod.CppConstructor object at 0x9c14ccc>
+/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/src/antenna/bindings/modulegen__gcc_ILP32.py:1226: Warning: exception TypeLookupError(['ns3::Hash::Hash32Function_ptr'],) in wrapper <pybindgen.cppmethod.CppConstructor object at 0x8c5ec0c>
   cls.add_constructor([param('ns3::Hash::Hash32Function_ptr', 'hp')])
-/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/src/antenna/bindings/modulegen__gcc_ILP32.py:1243: Warning: exception TypeLookupError(['ns3::Hash::Hash64Function_ptr'],) in wrapper <pybindgen.cppmethod.CppConstructor object at 0x9c1adac>
+/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/src/antenna/bindings/modulegen__gcc_ILP32.py:1243: Warning: exception TypeLookupError(['ns3::Hash::Hash64Function_ptr'],) in wrapper <pybindgen.cppmethod.CppConstructor object at 0x8c62cec>
   cls.add_constructor([param('ns3::Hash::Hash64Function_ptr', 'hp')])
 bindings/python/ns3modulegen-modular.py:27: UserWarning: exception CodeGenerationError('ns3::AntennaModel cannot be constructed (class has pure virtual methods)',) in wrapper <pybindgen.CppClass 'ns3::AntennaModel'>
   warnings.warn("exception %r in wrapper %s" % (exception, wrapper))

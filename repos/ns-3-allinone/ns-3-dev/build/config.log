@@ -1,13 +1,13 @@
-# project ns (3-dev) configured on Sun Nov 17 16:46:36 2013 by
-# waf 1.7.11 (abi 98, python 20704f0 on linux2)
+# project ns (3-dev) configured on Mon Dec  2 01:26:14 2013 by
+# waf 1.7.13 (abi 98, python 20704f0 on linux2)
 # using ./waf configure
 #
 ----------------------------------------
 Setting top to
-/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev
+/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev
 ----------------------------------------
 Setting out to
-/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build
+/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build
 ----------------------------------------
 Checking for 'gcc' (c compiler)
 find program=['gcc', 'cc'] paths=['/home/gritbear/bin/gcc-arm-none-eabi/bin', '/home/gritbear/bin', '/usr/lib/lightdm/lightdm', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games'] var='CC' -> '/usr/bin/gcc'
@@ -33,7 +33,7 @@ int main() { return 0; }
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-Wl,--soname=foo', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cc', '-c', '-o', 'test.cc.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/test.cc.1.o -> build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cc.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cc.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 ok
 ---------------------------------------------------------
 Checking for program python
@@ -104,7 +104,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-fno-strict-aliasing', '-fwrapv', '-fstack-protector', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_3b2479b91ea1f8aedc2bbc867fa4858e/testbuild/test.cpp.1.o -> build/.conf_check_3b2479b91ea1f8aedc2bbc867fa4858e/testbuild/testprog
 [0m
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_3b2479b91ea1f8aedc2bbc867fa4858e/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lpython2.7']
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_3b2479b91ea1f8aedc2bbc867fa4858e/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lpython2.7']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for program /usr/bin/python-config,python2.7-config,python-config-2.7,python2.7m-config
@@ -142,7 +142,7 @@ int main(int argc, char **argv)
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-fno-strict-aliasing', '-fwrapv', '-fstack-protector', '-fno-strict-aliasing', '-I/usr/include/python2.7', '-I/usr/include/i386-linux-gnu/python2.7', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_1f933b02106127ce3a9f4633a0e368e7/testbuild/test.cpp.1.o -> build/.conf_check_1f933b02106127ce3a9f4633a0e368e7/testbuild/testprog
 [0m
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_1f933b02106127ce3a9f4633a0e368e7/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lpython2.7']
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_1f933b02106127ce3a9f4633a0e368e7/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lpython2.7']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for compilation flag -fvisibility=hidden... support
@@ -156,7 +156,7 @@ int main() { return 0; }
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-fvisibility=hidden', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DHAVE_PYTHON_H=1', '../test.cc', '-c', '-o', 'test.cc.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/test.cc.1.o -> build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cc.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cc.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 ok
 ------------------------------------------------------------------------------------------------
 Checking for compilation flag -Wno-array-bounds... support
@@ -170,7 +170,7 @@ int main() { return 0; }
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-Wno-array-bounds', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DHAVE_PYTHON_H=1', '../test.cc', '-c', '-o', 'test.cc.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/test.cc.1.o -> build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cc.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cc.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 ok
 ------------------------------------------------------------------------------------------------
 Checking for pybindgen location
@@ -202,14 +202,14 @@ int main ()
 err: ../test.cc: In function ‘int main()’:
 ../test.cc:7:62: error: conversion from ‘std::vector<long unsigned int>’ to non-scalar type ‘std::vector<long long unsigned int>’ requested
 
-from /home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/bindings/python: Test does not build: Traceback (most recent call last):
-  File "/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/.waf-1.7.11-edc6ccb516c5e3f9b892efc9f53a610f/waflib/Tools/c_config.py", line 459, in run_c_code
+from /home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/bindings/python: Test does not build: Traceback (most recent call last):
+  File "/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/.waf-1.7.13-449cacfc6bb23414a8f4f2dcaa78dc04/waflib/Tools/c_config.py", line 459, in run_c_code
     bld.compile()
-  File "/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/.waf-1.7.11-edc6ccb516c5e3f9b892efc9f53a610f/waflib/Build.py", line 188, in compile
+  File "/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/.waf-1.7.13-449cacfc6bb23414a8f4f2dcaa78dc04/waflib/Build.py", line 188, in compile
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 169270988: cxx test.cc -> test.cc.1.o}
+	{task 3068264524L: cxx test.cc -> test.cc.1.o}
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DHAVE_PYTHON_H=1', '../test.cc', '-c', '-o', 'test.cc.1.o']
 
 ------------------------------------------------------------------------------------------------
@@ -232,7 +232,7 @@ int main ()
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DHAVE_PYTHON_H=1', '../test.cc', '-c', '-o', 'test.cc.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_355be13189b7b0ddfb123175e2bb33a5/testbuild/test.cc.1.o -> build/.conf_check_355be13189b7b0ddfb123175e2bb33a5/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cc.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_355be13189b7b0ddfb123175e2bb33a5/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cc.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_355be13189b7b0ddfb123175e2bb33a5/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 ------------------------------------------------------------------------------------------------
 Checking for types uint64_t and unsigned long long equivalence
 yes
@@ -256,7 +256,7 @@ int main ()
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DHAVE_PYTHON_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_97f735b5464546b54ea13ec62d1c17e5/testbuild/test.cpp.1.o -> build/.conf_check_97f735b5464546b54ea13ec62d1c17e5/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_97f735b5464546b54ea13ec62d1c17e5/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_97f735b5464546b54ea13ec62d1c17e5/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 complete
 ------------------------------------------------------------------------------------------------
 Python module pygccxml
@@ -266,7 +266,7 @@ err: Traceback (most recent call last):
 ImportError: No module named pygccxml
 
 not found
-from /home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/bindings/python: Could not find the python module 'pygccxml'
+from /home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/bindings/python: Could not find the python module 'pygccxml'
 ------------------------------------------------------------------------------------------------
 Checking boost includes
 1_49
@@ -319,7 +319,7 @@ int main() { boost::system::error_code c; }
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-I/usr/include', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DHAVE_PYTHON_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_968fbcee789046a8c143bb4a6e302895/testbuild/test.cpp.1.o -> build/.conf_check_968fbcee789046a8c143bb4a6e302895/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_968fbcee789046a8c143bb4a6e302895/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lboost_system-mt', '-lboost_signals-mt', '-lboost_filesystem-mt']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_968fbcee789046a8c143bb4a6e302895/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lboost_system-mt', '-lboost_signals-mt', '-lboost_filesystem-mt']
 ok
 ------------------------------------------------------------------------------------------------
 Checking for click location
@@ -364,18 +364,18 @@ err: ../test.cpp: In function ‘int main(int, char**)’:
 ../test.cpp:5:20: error: expected ‘)’ before numeric constant
 ../test.cpp:6:14: error: ‘uint128_t’ was not declared in this scope
 
-from /home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/src/core: Test does not build: Traceback (most recent call last):
-  File "/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/.waf-1.7.11-edc6ccb516c5e3f9b892efc9f53a610f/waflib/Tools/c_config.py", line 459, in run_c_code
+from /home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/src/core: Test does not build: Traceback (most recent call last):
+  File "/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/.waf-1.7.13-449cacfc6bb23414a8f4f2dcaa78dc04/waflib/Tools/c_config.py", line 459, in run_c_code
     bld.compile()
-  File "/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/.waf-1.7.11-edc6ccb516c5e3f9b892efc9f53a610f/waflib/Build.py", line 188, in compile
+  File "/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/.waf-1.7.13-449cacfc6bb23414a8f4f2dcaa78dc04/waflib/Build.py", line 188, in compile
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 169333612: cxx test.cpp -> test.cpp.1.o}
+	{task 3067868716L: cxx test.cpp -> test.cpp.1.o}
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 
 not found
-from /home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/src/core: The configuration failed
+from /home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/src/core: The configuration failed
 ------------------------------------------------------------------------------------------------
 Checking for type __uint128_t
 ==>
@@ -398,18 +398,18 @@ err: ../test.cpp: In function ‘int main(int, char**)’:
 ../test.cpp:5:22: error: expected ‘)’ before numeric constant
 ../test.cpp:6:14: error: ‘__uint128_t’ was not declared in this scope
 
-from /home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/src/core: Test does not build: Traceback (most recent call last):
-  File "/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/.waf-1.7.11-edc6ccb516c5e3f9b892efc9f53a610f/waflib/Tools/c_config.py", line 459, in run_c_code
+from /home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/src/core: Test does not build: Traceback (most recent call last):
+  File "/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/.waf-1.7.13-449cacfc6bb23414a8f4f2dcaa78dc04/waflib/Tools/c_config.py", line 459, in run_c_code
     bld.compile()
-  File "/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/.waf-1.7.11-edc6ccb516c5e3f9b892efc9f53a610f/waflib/Build.py", line 188, in compile
+  File "/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/.waf-1.7.13-449cacfc6bb23414a8f4f2dcaa78dc04/waflib/Build.py", line 188, in compile
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 169270220: cxx test.cpp -> test.cpp.1.o}
+	{task 3067961900L: cxx test.cpp -> test.cpp.1.o}
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 
 not found
-from /home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/src/core: The configuration failed
+from /home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/src/core: The configuration failed
 ------------------------------------------------------------------------------------------------
 Checking high precision time implementation
 cairo 128-bit integer
@@ -429,7 +429,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DINT64X64_USE_CAIRO=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_fa0c4ec9c63ac505501cc0863d9bdc48/testbuild/test.cpp.1.o -> build/.conf_check_fa0c4ec9c63ac505501cc0863d9bdc48/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_fa0c4ec9c63ac505501cc0863d9bdc48/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_fa0c4ec9c63ac505501cc0863d9bdc48/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for header inttypes.h
@@ -447,7 +447,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DINT64X64_USE_CAIRO=1', '-DHAVE_STDINT_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_7c67b81911f8bf0aede92c843d0e47cf/testbuild/test.cpp.1.o -> build/.conf_check_7c67b81911f8bf0aede92c843d0e47cf/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_7c67b81911f8bf0aede92c843d0e47cf/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_7c67b81911f8bf0aede92c843d0e47cf/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for header sys/inttypes.h
@@ -466,18 +466,18 @@ int main(int argc, char **argv) {
 err: ../test.cpp:1:26: fatal error: sys/inttypes.h: No such file or directory
 compilation terminated.
 
-from /home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/src/core: Test does not build: Traceback (most recent call last):
-  File "/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/.waf-1.7.11-edc6ccb516c5e3f9b892efc9f53a610f/waflib/Tools/c_config.py", line 459, in run_c_code
+from /home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/src/core: Test does not build: Traceback (most recent call last):
+  File "/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/.waf-1.7.13-449cacfc6bb23414a8f4f2dcaa78dc04/waflib/Tools/c_config.py", line 459, in run_c_code
     bld.compile()
-  File "/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/.waf-1.7.11-edc6ccb516c5e3f9b892efc9f53a610f/waflib/Build.py", line 188, in compile
+  File "/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/.waf-1.7.13-449cacfc6bb23414a8f4f2dcaa78dc04/waflib/Build.py", line 188, in compile
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 168943692: cxx test.cpp -> test.cpp.1.o}
+	{task 3068173580L: cxx test.cpp -> test.cpp.1.o}
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DINT64X64_USE_CAIRO=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 
 not found
-from /home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/src/core: The configuration failed
+from /home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/src/core: The configuration failed
 ------------------------------------------------------------------------------------------------
 Checking for header sys/types.h
 ==>
@@ -494,7 +494,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DINT64X64_USE_CAIRO=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_8d38681417ac64f5b5b7d4ca87b0e4f3/testbuild/test.cpp.1.o -> build/.conf_check_8d38681417ac64f5b5b7d4ca87b0e4f3/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_8d38681417ac64f5b5b7d4ca87b0e4f3/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_8d38681417ac64f5b5b7d4ca87b0e4f3/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for header sys/stat.h
@@ -512,7 +512,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DINT64X64_USE_CAIRO=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_8dd79274749d59bf459dfbeb1200c7d7/testbuild/test.cpp.1.o -> build/.conf_check_8dd79274749d59bf459dfbeb1200c7d7/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_8dd79274749d59bf459dfbeb1200c7d7/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_8dd79274749d59bf459dfbeb1200c7d7/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for header dirent.h
@@ -530,7 +530,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DINT64X64_USE_CAIRO=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_c94d96928742c001335a0559791a93d8/testbuild/test.cpp.1.o -> build/.conf_check_c94d96928742c001335a0559791a93d8/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_c94d96928742c001335a0559791a93d8/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_c94d96928742c001335a0559791a93d8/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for header stdlib.h
@@ -548,7 +548,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DINT64X64_USE_CAIRO=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_3a82ef2f96ebcc67f6086c98d2e6291e/testbuild/test.cpp.1.o -> build/.conf_check_3a82ef2f96ebcc67f6086c98d2e6291e/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_3a82ef2f96ebcc67f6086c98d2e6291e/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_3a82ef2f96ebcc67f6086c98d2e6291e/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for header signal.h
@@ -566,7 +566,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DINT64X64_USE_CAIRO=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_48955ac54d2136a572805353a7b9b62d/testbuild/test.cpp.1.o -> build/.conf_check_48955ac54d2136a572805353a7b9b62d/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_48955ac54d2136a572805353a7b9b62d/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_48955ac54d2136a572805353a7b9b62d/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for header pthread.h
@@ -586,7 +586,7 @@ int main ()
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-pthread', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DINT64X64_USE_CAIRO=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_2be466e82e703a744ee152afe2b58299/testbuild/test.cpp.1.o -> build/.conf_check_2be466e82e703a744ee152afe2b58299/testbuild/testprog
 [0m
-['/usr/bin/g++', '-pthread', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_2be466e82e703a744ee152afe2b58299/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', '-pthread', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_2be466e82e703a744ee152afe2b58299/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for header stdint.h
@@ -604,7 +604,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DINT64X64_USE_CAIRO=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_fa0c4ec9c63ac505501cc0863d9bdc48/testbuild/test.cpp.1.o -> build/.conf_check_fa0c4ec9c63ac505501cc0863d9bdc48/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_fa0c4ec9c63ac505501cc0863d9bdc48/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_fa0c4ec9c63ac505501cc0863d9bdc48/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for header inttypes.h
@@ -622,7 +622,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DINT64X64_USE_CAIRO=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_7c67b81911f8bf0aede92c843d0e47cf/testbuild/test.cpp.1.o -> build/.conf_check_7c67b81911f8bf0aede92c843d0e47cf/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_7c67b81911f8bf0aede92c843d0e47cf/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_7c67b81911f8bf0aede92c843d0e47cf/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for header sys/inttypes.h
@@ -641,18 +641,18 @@ int main(int argc, char **argv) {
 err: ../test.cpp:1:26: fatal error: sys/inttypes.h: No such file or directory
 compilation terminated.
 
-from /home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/src/core: Test does not build: Traceback (most recent call last):
-  File "/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/.waf-1.7.11-edc6ccb516c5e3f9b892efc9f53a610f/waflib/Tools/c_config.py", line 459, in run_c_code
+from /home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/src/core: Test does not build: Traceback (most recent call last):
+  File "/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/.waf-1.7.13-449cacfc6bb23414a8f4f2dcaa78dc04/waflib/Tools/c_config.py", line 459, in run_c_code
     bld.compile()
-  File "/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/.waf-1.7.11-edc6ccb516c5e3f9b892efc9f53a610f/waflib/Build.py", line 188, in compile
+  File "/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/.waf-1.7.13-449cacfc6bb23414a8f4f2dcaa78dc04/waflib/Build.py", line 188, in compile
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 169242380: cxx test.cpp -> test.cpp.1.o}
+	{task 140382028: cxx test.cpp -> test.cpp.1.o}
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DINT64X64_USE_CAIRO=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 
 not found
-from /home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/src/core: The configuration failed
+from /home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/src/core: The configuration failed
 ------------------------------------------------------------------------------------------------
 Checking for library rt
 ==>
@@ -668,7 +668,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-pthread', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DINT64X64_USE_CAIRO=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_5ef57bc0d8aa3565949b6ce1186fd4a7/testbuild/test.cpp.1.o -> build/.conf_check_5ef57bc0d8aa3565949b6ce1186fd4a7/testbuild/testprog
 [0m
-['/usr/bin/g++', '-pthread', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_5ef57bc0d8aa3565949b6ce1186fd4a7/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lrt']
+['/usr/bin/g++', '-pthread', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_5ef57bc0d8aa3565949b6ce1186fd4a7/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lrt']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for header netpacket/packet.h
@@ -686,7 +686,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_f00bb2460dc7019f64c1a347be5879fa/testbuild/test.cpp.1.o -> build/.conf_check_f00bb2460dc7019f64c1a347be5879fa/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_f00bb2460dc7019f64c1a347be5879fa/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_f00bb2460dc7019f64c1a347be5879fa/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for header sys/ioctl.h
@@ -704,7 +704,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_PACKET_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_ebd591dbc3bb45aa25214505e9aa0d0f/testbuild/test.cpp.1.o -> build/.conf_check_ebd591dbc3bb45aa25214505e9aa0d0f/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_ebd591dbc3bb45aa25214505e9aa0d0f/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_ebd591dbc3bb45aa25214505e9aa0d0f/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for header net/if.h
@@ -722,7 +722,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_PACKET_H=1', '-DHAVE_SYS_IOCTL_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_ab7199aa46fcaa2e15071e73776f8218/testbuild/test.cpp.1.o -> build/.conf_check_ab7199aa46fcaa2e15071e73776f8218/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_ab7199aa46fcaa2e15071e73776f8218/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_ab7199aa46fcaa2e15071e73776f8218/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for header net/ethernet.h
@@ -740,7 +740,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_PACKET_H=1', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_6c6255d84543ffa2d8b83c989561eef9/testbuild/test.cpp.1.o -> build/.conf_check_6c6255d84543ffa2d8b83c989561eef9/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_6c6255d84543ffa2d8b83c989561eef9/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_6c6255d84543ffa2d8b83c989561eef9/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for header linux/if_tun.h
@@ -758,7 +758,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_PACKET_H=1', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_79f849e1774b3cde8897857e178c7c8c/testbuild/test.cpp.1.o -> build/.conf_check_79f849e1774b3cde8897857e178c7c8c/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_79f849e1774b3cde8897857e178c7c8c/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_79f849e1774b3cde8897857e178c7c8c/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for header netpacket/packet.h
@@ -776,7 +776,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_IF_TUN_H=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_f00bb2460dc7019f64c1a347be5879fa/testbuild/test.cpp.1.o -> build/.conf_check_f00bb2460dc7019f64c1a347be5879fa/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_f00bb2460dc7019f64c1a347be5879fa/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_f00bb2460dc7019f64c1a347be5879fa/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------------------------------------
 Checking for NSC location
@@ -806,7 +806,7 @@ int main(int argc, char **argv) {
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_SQLITE3=1', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_79f849e1774b3cde8897857e178c7c8c/testbuild/test.cpp.1.o -> build/.conf_check_79f849e1774b3cde8897857e178c7c8c/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_79f849e1774b3cde8897857e178c7c8c/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_79f849e1774b3cde8897857e178c7c8c/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------------------------------------
 Python module gtk
@@ -828,7 +828,7 @@ err: Traceback (most recent call last):
 ImportError: No module named pygraphviz
 
 not found
-from /home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/src/visualizer: Could not find the python module 'pygraphviz'
+from /home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/src/visualizer: Could not find the python module 'pygraphviz'
 ------------------------------------------------------------------------------------------------
 Checking for program sudo
 /usr/bin/sudo
@@ -855,7 +855,7 @@ int main() { return 0; }
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-Wno-error=deprecated-declarations', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_SQLITE3=1', '-DHAVE_IF_TUN_H=1', '-DHAVE_GSL=1', '../test.cc', '-c', '-o', 'test.cc.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/test.cc.1.o -> build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cc.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cc.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 ok
 ------------------------------------------------------------------------------------------------
 Checking for compilation flag -Wno-error=deprecated-d... support
@@ -869,7 +869,7 @@ int main() { return 0; }
 ['/usr/bin/gcc', '-Wno-error=deprecated-declarations', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_SQLITE3=1', '-DHAVE_IF_TUN_H=1', '-DHAVE_GSL=1', '../test.c', '-c', '-o', 'test.c.1.o']
 [2/2] [33mcprogram: build/.conf_check_d8a2c40aecfb7c8eac7dd03fcbfb1110/testbuild/test.c.1.o -> build/.conf_check_d8a2c40aecfb7c8eac7dd03fcbfb1110/testbuild/testprog
 [0m
-['/usr/bin/gcc', 'test.c.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_d8a2c40aecfb7c8eac7dd03fcbfb1110/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/gcc', 'test.c.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_d8a2c40aecfb7c8eac7dd03fcbfb1110/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 ok
 ------------------------------------------------------------------------------------------------
 Checking for compilation flag -fstrict-aliasing... support
@@ -883,7 +883,7 @@ int main() { return 0; }
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-Wno-error=deprecated-declarations', '-fstrict-aliasing', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_SQLITE3=1', '-DHAVE_IF_TUN_H=1', '-DHAVE_GSL=1', '../test.cc', '-c', '-o', 'test.cc.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/test.cc.1.o -> build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cc.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cc.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 ok
 ------------------------------------------------------------------------------------------------
 Checking for compilation flag -fstrict-aliasing... support
@@ -897,7 +897,7 @@ int main() { return 0; }
 ['/usr/bin/gcc', '-fstrict-aliasing', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_SQLITE3=1', '-DHAVE_IF_TUN_H=1', '-DHAVE_GSL=1', '../test.c', '-c', '-o', 'test.c.1.o']
 [2/2] [33mcprogram: build/.conf_check_d8a2c40aecfb7c8eac7dd03fcbfb1110/testbuild/test.c.1.o -> build/.conf_check_d8a2c40aecfb7c8eac7dd03fcbfb1110/testbuild/testprog
 [0m
-['/usr/bin/gcc', 'test.c.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_d8a2c40aecfb7c8eac7dd03fcbfb1110/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/gcc', 'test.c.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_d8a2c40aecfb7c8eac7dd03fcbfb1110/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 ok
 ------------------------------------------------------------------------------------------------
 Checking for compilation flag -Wstrict-aliasing... support
@@ -911,7 +911,7 @@ int main() { return 0; }
 ['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-Wno-error=deprecated-declarations', '-fstrict-aliasing', '-Wstrict-aliasing', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_SQLITE3=1', '-DHAVE_IF_TUN_H=1', '-DHAVE_GSL=1', '../test.cc', '-c', '-o', 'test.cc.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/test.cc.1.o -> build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cc.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cc.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_fe0ca542f39064c5a14ee41a2e983996/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 ok
 ------------------------------------------------------------------------------------------------
 Checking for compilation flag -Wstrict-aliasing... support
@@ -925,10 +925,10 @@ int main() { return 0; }
 ['/usr/bin/gcc', '-Wstrict-aliasing', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_SQLITE3=1', '-DHAVE_IF_TUN_H=1', '-DHAVE_GSL=1', '../test.c', '-c', '-o', 'test.c.1.o']
 [2/2] [33mcprogram: build/.conf_check_d8a2c40aecfb7c8eac7dd03fcbfb1110/testbuild/test.c.1.o -> build/.conf_check_d8a2c40aecfb7c8eac7dd03fcbfb1110/testbuild/testprog
 [0m
-['/usr/bin/gcc', 'test.c.1.o', '-o', '/home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev/build/.conf_check_d8a2c40aecfb7c8eac7dd03fcbfb1110/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/gcc', 'test.c.1.o', '-o', '/home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev/build/.conf_check_d8a2c40aecfb7c8eac7dd03fcbfb1110/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 ok
 ------------------------------------------------------------------------------------------------
 Checking for program doxygen
 not found
 find program=['doxygen'] paths=['/home/gritbear/bin/gcc-arm-none-eabi/bin', '/home/gritbear/bin', '/usr/lib/lightdm/lightdm', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games'] var='DOXYGEN' -> ''
-from /home/gritbear/Dropbox/ELEC 537/Elec537FinalProject/repos/ns-3-allinone/ns-3-dev: Could not find the program doxygen
+from /home/gritbear/ELEC537Final/repos/ns-3-allinone/ns-3-dev: Could not find the program doxygen
