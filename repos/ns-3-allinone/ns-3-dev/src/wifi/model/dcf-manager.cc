@@ -273,6 +273,13 @@ DcfManager::DcfManager ()
     m_lowListener (0)
 {
   NS_LOG_FUNCTION (this);
+//Lee's modification starts ========================================================
+  usingLLTBasedAlgo = false;
+  isEarliestLLT = false;
+  alreadyWaited = false;
+  m_low = NULL;
+//Lee's modification ends ==========================================================
+
 }
 
 DcfManager::~DcfManager ()

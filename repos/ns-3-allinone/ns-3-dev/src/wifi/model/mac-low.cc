@@ -282,6 +282,17 @@ private:
 };
 
 
+//Lee's modification starts ========================================================
+//TODO
+void MacLow::CheckIsEarliest(){
+  //check if the time of itself is the lowest
+
+
+  isEarliestLLT = false;
+}
+
+//Lee's modification ends ==========================================================
+
 MacLow::MacLow ()
   : m_normalAckTimeoutEvent (),
     m_fastAckTimeoutEvent (),
@@ -301,6 +312,15 @@ MacLow::MacLow ()
   m_lastNavDuration = Seconds (0);
   m_lastNavStart = Seconds (0);
   m_promisc = false;
+
+//Lee's modification starts ========================================================
+//default not using LLT
+  usingLLTBasedAlgo = false;
+  isEarlist = false;
+  alreadyWaited false;
+  LLTmap = new std::map <Mac48Address, float>();
+  dcfManager = NULL;
+//Lee's modification ends ==========================================================
 }
 
 MacLow::~MacLow ()

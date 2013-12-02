@@ -19,6 +19,20 @@
  * Author: Mathieu Lacage <mathieu.lacage@sophia.inria.fr>
  * Author: Mirko Banchi <mk.banchi@gmail.com>
  */
+
+//please look for the following sections
+//Lee's modification starts ========================================================
+// some codes
+//e.g.
+//  void SetUsingLLTAlgo(bool enable){usingLLTBasedAlgo = enable;}
+//  std::map <Mac48Address, float> * GetLLTMap(){return &aLLTmap;}
+//  void CheckIsEarliest();
+//  void SendIsEarlistSignal();
+//  void SetAlreadyWaited(bool it_alreadyWaited){alreadyWaited = it_alreadyWaited;}
+//  and fields...
+//Lee's modification ends ==========================================================
+
+
 #ifndef MAC_LOW_H
 #define MAC_LOW_H
 
@@ -380,6 +394,18 @@ std::ostream &operator << (std::ostream &os, const MacLowTransmissionParameters 
 class MacLow : public Object
 {
 public:
+//Lee's modification starts ========================================================
+  void SetUsingLLTAlgo(bool enable){usingLLTBasedAlgo = enable;}
+  std::map <Mac48Address, float> * GetLLTMap(){return &aLLTmap;}
+  void SendIsEarlistSignal(){dcfManager->SetIsEarliestLLT(isEarliestLLT);}
+  void SetAlreadyWaited(bool it_alreadyWaited){alreadyWaited = it_alreadyWaited;}
+  void SetDcfManager(DcfManager * adcfManager){dcfManager = adcfManager;}
+
+  void CheckIsEarliest();
+//Lee's modification ends ==========================================================
+
+
+
   typedef Callback<void, Ptr<Packet>, const WifiMacHeader*> MacLowRxCallback;
 
   MacLow ();
@@ -513,6 +539,16 @@ public:
    */
   void RegisterBlockAckListenerForAc (enum AcIndex ac, MacLowBlockAckEventListener *listener);
 private:
+
+//Lee's modification starts ========================================================
+  bool usingLLTBasedAlgo;
+  bool isEarliestLLT;
+  bool alreadyWaited;
+  std::map <Mac48Address, float> LLTmap;
+  DcfManager * dcfManager;
+//Lee's modification ends ==========================================================
+
+
   void CancelAllEvents (void);
   uint32_t GetAckSize (void) const;
   uint32_t GetBlockAckSize (enum BlockAckType type) const;

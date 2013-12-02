@@ -17,6 +17,12 @@
  *
  * Author: Mathieu Lacage <mathieu.lacage@sophia.inria.fr>
  */
+
+//Lee's modification starts ========================================================
+//  void EnableLLTAlgo();
+//  void DisableLLTAlgo();
+//Lee's modification ends ==========================================================
+
 #ifndef REGULAR_WIFI_MAC_H
 #define REGULAR_WIFI_MAC_H
 
@@ -50,6 +56,11 @@ class DcfManager;
 class RegularWifiMac : public WifiMac
 {
 public:
+//Lee's modification starts ========================================================
+  void EnableLLTAlgo();
+  void DisableLLTAlgo();
+//Lee's modification ends =========================================================
+
   static TypeId GetTypeId (void);
 
   RegularWifiMac ();
