@@ -57,7 +57,7 @@ class RegularWifiMac : public WifiMac
 {
 public:
 //Lee's modification starts ========================================================
-  void EnableLLTAlgo();
+  void EnableLLTAlgo(Time waitingWindow, int prioritySlots);
   void DisableLLTAlgo();
 //Lee's modification ends =========================================================
 

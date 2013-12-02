@@ -57,8 +57,8 @@ class RegularWifiMac : public WifiMac
 {
 public:
 //Lee's modification starts ========================================================
-//  void EnableLLTAlgo();
-//  void DisableLLTAlgo();
+  void EnableLLTAlgo();
+  void DisableLLTAlgo();
 //Lee's modification ends =========================================================
 
   static TypeId GetTypeId (void);

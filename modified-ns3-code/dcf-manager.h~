@@ -186,7 +186,7 @@ class DcfManager
 {
 public:
 //Lee's modification starts ========================================================
-  void SetUsingLLTAlgo(bool enable){usingLLTBasedAlgo = enable;}
+  void SetUsingLLTAlgo(bool enable, int prioritySlotsNum){usingLLTBasedAlgo = enable;prioritySlots = prioritySlotsNum;}
   void SetIsEarliestLLT(bool isEarlist){isEarliestLLT = isEarlist;}
   void SetMacLow(Ptr<ns3::MacLow> mlow){m_low = mlow;}
   void sendAlreadyWaitedSignal(){m_low ->SetAlreadyWaited(alreadyWaited);}
@@ -308,6 +308,7 @@ private:
   bool usingLLTBasedAlgo;
   bool isEarliestLLT;
   bool alreadyWaited;
+  int prioritySlots;
 
 //by-pass the low listener (fast but non-elegant solution) 
   Ptr<ns3::MacLow> m_low;

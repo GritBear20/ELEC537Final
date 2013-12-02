@@ -285,19 +285,20 @@ private:
 
 
 //Lee's modification starts ========================================================
-void MacLow::SetUsingLLTAlgo(bool enable){
+void MacLow::SetUsingLLTAlgo(bool enable, Time waitingWindowTime){
   usingLLTBasedAlgo = enable;
-  
-  if ( tspec->tv_nsec == -1 ) {
+  waitingWindow = waitingWindowTime;
+
+  if ( !LLTmap.empty()) {
     //initialize itself within the map
-    clock_getres(CLOCK_PROCESS_CPUTIME_ID, tspec);
-    LLTmap[MacLow::GetAddress()] = tspec->tv_nsec;
+    Time curTime = Simulator::Now();
+    LLTmap[MacLow::GetAddress()] = curTime.GetNanoSeconds();
   }
 }
 
 Mac48Address MacLow::CheckIsEarliest(){
   //check if the time of itself is the lowest
-  std::pair<Mac48Address, long> min 
+  std::pair<Mac48Address, int64_t> min 
       = *std::min_element(LLTmap.begin(), LLTmap.end(), CompareSecond());
 
   if(min.first == MacLow::GetAddress()){
@@ -312,7 +313,12 @@ Mac48Address MacLow::CheckIsEarliest(){
 
 void MacLow::CheckAlreadyWaited(){
     Time curTime = Simulator::Now();
-
+    int64_t time_elapsed = curTime.GetNanoSeconds() - LLTfinished.GetNanoSeconds();
+    if(time_elapsed >= waitingWindow.GetNanoSeconds()){
+        alreadyWaited = true;
+    }else{
+        alreadyWaited = false;
+    }
 }
 //Lee's modification ends ==========================================================
 
@@ -341,13 +347,7 @@ MacLow::MacLow ()
   usingLLTBasedAlgo = false;
   isEarliestLLT = false;
   alreadyWaited = false;
-  tspec = new timespec();
-  tspec->tv_nsec = -1; //initial value
-  //LLTmap = new std::map <Mac48Address, float>(); it does not need initialization
-  
-  AP_LLTfinished = Simulator::Now();  
-  Client_LLTfinished = Simulator::Now();
-
+  LLTfinished = Simulator::Now();  
 //Lee's modification ends ==========================================================
 }
 
@@ -787,6 +787,14 @@ MacLow::ReceiveOk (Ptr<Packet> packet, double rxSnr, WifiMode txMode, WifiPreamb
            && m_ctsTimeoutEvent.IsRunning ()
            && m_currentPacket != 0)
     {
+      //Lee's modification starts ========================================================
+      //update the LLTmap
+      if (usingLLTBasedAlgo) {
+          LLTmap[m_self] = Simulator::Now().GetNanoSeconds(); 
+          MacLow::CheckIsEarliest();  
+      }
+      //Lee's modification ends ========================================================
+
       NS_LOG_DEBUG ("receive cts from=" << m_currentHdr.GetAddr1 ());
       SnrTag tag;
       packet->RemovePacketTag (tag);
@@ -1702,6 +1710,14 @@ MacLow::SendCtsToSelf (void)
 void
 MacLow::SendCtsAfterRts (Mac48Address source, Time duration, WifiMode rtsTxMode, double rtsSnr)
 {
+        //Lee's modification starts ========================================================
+        //update the LLTmap
+        if (usingLLTBasedAlgo) {
+          LLTmap[source] = Simulator::Now().GetNanoSeconds(); 
+          MacLow::CheckIsEarliest();  
+        }
+        //Lee's modification ends ========================================================
+
   NS_LOG_FUNCTION (this << source << duration << rtsTxMode << rtsSnr);
   /* send a CTS when you receive a RTS
    * right after SIFS.
@@ -1779,9 +1795,12 @@ MacLow::SendDataAfterCts (Mac48Address source, Time duration, WifiMode txMode)
 void
 MacLow::WaitSifsAfterEndTx (void)
 {
-//Lee's modification starts ==========================================================
-Client_LLTfinished = Simulator::Now();
-//Lee's modification ends ============================================================
+  //Lee's modification starts ==========================================================
+if (usingLLTBasedAlgo) {
+  LLTfinished = Simulator::Now();
+  alreadyWaited = false;
+}
+  //Lee's modification ends ============================================================
 
   m_listener->StartNext ();
 }
@@ -1842,7 +1861,10 @@ MacLow::SendAckAfterData (Mac48Address source, Time duration, WifiMode dataTxMod
   ForwardDown (packet, &ack, ackTxVector, preamble);
 
   //Lee's modification starts ==========================================================
-  AP_LLTfinished = Simulator::Now();
+if (usingLLTBasedAlgo) {
+  LLTfinished = Simulator::Now();
+  alreadyWaited = false;
+}
   //Lee's modification ends ============================================================
 }
 

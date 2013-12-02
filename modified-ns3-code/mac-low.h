@@ -388,7 +388,7 @@ private:
 std::ostream &operator << (std::ostream &os, const MacLowTransmissionParameters &params);
 
 //Lee's modification starts ========================================================
-typedef std::pair<Mac48Address, long> MyPairType;
+typedef std::pair<Mac48Address, int64_t> MyPairType;
 struct CompareSecond
 {
     bool operator()(const MyPairType& left, const MyPairType& right) const
@@ -406,8 +406,9 @@ class MacLow : public Object
 {
 public:
 //Lee's modification starts ========================================================
-  void SetUsingLLTAlgo(bool enable);
-  std::map <Mac48Address, long> * GetLLTMap(){return &LLTmap;}
+  void SetUsingLLTAlgo(bool enable){usingLLTBasedAlgo = enable;}
+  void SetUsingLLTAlgo(bool enable, Time waitingWindowTime);
+  std::map <Mac48Address, int64_t> * GetLLTMap(){return &LLTmap;}
   bool GetIsEarliest(){return isEarliestLLT;}
   void SetAlreadyWaited(bool it_alreadyWaited){alreadyWaited = it_alreadyWaited;}
   
@@ -560,7 +561,7 @@ private:
   Time waitingWindow;
   Time LLTfinished;
 
-  std::map <Mac48Address, long> LLTmap;
+  std::map <Mac48Address, int64_t> LLTmap;
 
   timespec * tspec;
   Mac48Address curEarliestLLTAddress;
