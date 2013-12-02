@@ -316,10 +316,9 @@ MacLow::MacLow ()
 //Lee's modification starts ========================================================
 //default not using LLT
   usingLLTBasedAlgo = false;
-  isEarlist = false;
-  alreadyWaited false;
-  LLTmap = new std::map <Mac48Address, float>();
-  dcfManager = NULL;
+  isEarliestLLT = false;
+  alreadyWaited = false;
+  //LLTmap = new std::map <Mac48Address, float>();
 //Lee's modification ends ==========================================================
 }
 

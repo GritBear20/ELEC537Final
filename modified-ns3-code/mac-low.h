@@ -397,10 +397,9 @@ public:
 //Lee's modification starts ========================================================
   void SetUsingLLTAlgo(bool enable){usingLLTBasedAlgo = enable;}
   std::map <Mac48Address, float> * GetLLTMap(){return &LLTmap;}
-  void SendIsEarlistSignal(){dcfManager->SetIsEarliestLLT(isEarliestLLT);}
+  bool GetIsEarliest(){return isEarliestLLT;}
   void SetAlreadyWaited(bool it_alreadyWaited){alreadyWaited = it_alreadyWaited;}
-  void SetDcfManager(DcfManager * adcfManager){dcfManager = adcfManager;}
-
+  
   void CheckIsEarliest();
 //Lee's modification ends ==========================================================
 
@@ -545,7 +544,6 @@ private:
   bool isEarliestLLT;
   bool alreadyWaited;
   std::map <Mac48Address, float> LLTmap;
-  DcfManager * dcfManager;
 //Lee's modification ends ==========================================================
 
 

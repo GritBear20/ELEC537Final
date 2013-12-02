@@ -76,9 +76,8 @@ RegularWifiMac::RegularWifiMac ()
 
 //Lee's modification starts ========================================================
 //link Mac Low and DcfManager and by-pass the listener for LLT algo
-  m_low->SetDcfManager(m_dcfManager);
   m_dcfManager->SetMacLow(m_low);
-  WifiMac::DisableLLTAlgo();
+  RegularWifiMac::DisableLLTAlgo();
 //Lee's modification ends   ========================================================
 
   // Construct the EDCAFs. The ordering is important - highest

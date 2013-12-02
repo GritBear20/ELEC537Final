@@ -39,13 +39,13 @@ NS_LOG_COMPONENT_DEFINE ("RegularWifiMac");
 namespace ns3 {
 
 //Lee's modification starts ========================================================
-void WifiMac::EnableLLTAlgo(){
+void RegularWifiMac::EnableLLTAlgo(){
     //set dcf-manager and mac-low LLT algo to true
     m_dcfManager->SetUsingLLTAlgo(true);
     m_low->SetUsingLLTAlgo(true);
 }
 
-void WifiMac::DisableLLTAlgo(){
+void RegularWifiMac::DisableLLTAlgo(){
     //set dcf-manager and mac-low LLT algo to false
     m_dcfManager->SetUsingLLTAlgo(false);
     m_low->SetUsingLLTAlgo(false);
@@ -76,9 +76,8 @@ RegularWifiMac::RegularWifiMac ()
 
 //Lee's modification starts ========================================================
 //link Mac Low and DcfManager and by-pass the listener for LLT algo
-  m_low->SetDcfManager(m_dcfManager);
   m_dcfManager->SetMacLow(m_low);
-  WifiMac::DisableLLTAlgo();
+  RegularWifiMac::DisableLLTAlgo();
 //Lee's modification ends   ========================================================
 
   // Construct the EDCAFs. The ordering is important - highest
