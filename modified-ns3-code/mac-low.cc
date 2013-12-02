@@ -35,6 +35,8 @@
 #include "edca-txop-n.h"
 #include "snr-tag.h"
 
+#include <algorithm>    // std::min_element, std::max_element
+
 NS_LOG_COMPONENT_DEFINE ("MacLow");
 
 #undef NS_LOG_APPEND_CONTEXT
@@ -284,11 +286,26 @@ private:
 
 //Lee's modification starts ========================================================
 //TODO
+void MacLow::SetUsingLLTAlgo(bool enable){
+  usingLLTBasedAlgo = enable;
+  
+  if ( tspec->tv_nsec == -1 ) {
+    //initialize itself within the map
+    clock_getres(CLOCK_PROCESS_CPUTIME_ID, tspec);
+    LLTmap[MacLow::GetAddress()] = tspec->tv_nsec;
+  }
+}
+
 void MacLow::CheckIsEarliest(){
   //check if the time of itself is the lowest
+  std::pair<Mac48Address, long> min 
+      = *std::min_element(LLTmap.begin(), LLTmap.end(), CompareSecond());
 
-
-  isEarliestLLT = false;
+  if(min.first == MacLow::GetAddress()){
+    isEarliestLLT = true;
+  }else{
+    isEarliestLLT = false;
+  }
 }
 
 //Lee's modification ends ==========================================================
@@ -318,9 +335,9 @@ MacLow::MacLow ()
   usingLLTBasedAlgo = false;
   isEarliestLLT = false;
   alreadyWaited = false;
+  tspec = new timespec();
+  tspec->tv_nsec = -1; //initial value
   //LLTmap = new std::map <Mac48Address, float>(); it does not need initialization
-  //TODO: add its own address to the map
-
 
 //Lee's modification ends ==========================================================
 }

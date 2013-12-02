@@ -40,6 +40,7 @@
 #include <stdint.h>
 #include <ostream>
 #include <map>
+#include <time.h>
 
 #include "wifi-mac-header.h"
 #include "wifi-mode.h"
@@ -386,6 +387,16 @@ private:
 
 std::ostream &operator << (std::ostream &os, const MacLowTransmissionParameters &params);
 
+//Lee's modification starts ========================================================
+typedef std::pair<Mac48Address, long> MyPairType;
+struct CompareSecond
+{
+    bool operator()(const MyPairType& left, const MyPairType& right) const
+    {
+        return left.second < right.second;
+    }
+};
+//Lee's modification ends ==========================================================
 
 /**
  * \ingroup wifi
@@ -395,8 +406,8 @@ class MacLow : public Object
 {
 public:
 //Lee's modification starts ========================================================
-  void SetUsingLLTAlgo(bool enable){usingLLTBasedAlgo = enable;}
-  std::map <Mac48Address, float> * GetLLTMap(){return &LLTmap;}
+  void SetUsingLLTAlgo(bool enable);
+  std::map <Mac48Address, long> * GetLLTMap(){return &LLTmap;}
   bool GetIsEarliest(){return isEarliestLLT;}
   void SetAlreadyWaited(bool it_alreadyWaited){alreadyWaited = it_alreadyWaited;}
   
@@ -543,7 +554,10 @@ private:
   bool usingLLTBasedAlgo;
   bool isEarliestLLT;
   bool alreadyWaited;
-  std::map <Mac48Address, float> LLTmap;
+  std::map <Mac48Address, long> LLTmap;
+
+  timespec * tspec;
+
 //Lee's modification ends ==========================================================
 
 
