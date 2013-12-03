@@ -50,7 +50,8 @@ double experiment (bool enableCtsRts, double radius, int dataRateBPS, int simula
   wifiPhy.SetChannel (wifiChannel);
   NqosWifiMacHelper wifiMac = NqosWifiMacHelper::Default ();
   wifiMac.SetType ("ns3::AdhocWifiMac"); // use ad-hoc MAC
-  NetDeviceContainer devices = wifi.Install (wifiPhy, wifiMac, nodes);
+  //NetDeviceContainer devices = wifi.Install (wifiPhy, wifiMac, nodes);
+  NetDeviceContainer devices = wifi.InstallLLT (wifiPhy, wifiMac, nodes, 8, 4);
 
   // uncomment the following to have athstats output
   // AthstatsHelper athstats;
@@ -118,7 +119,7 @@ double experiment (bool enableCtsRts, double radius, int dataRateBPS, int simula
 
 for (int i = 0; i < 3; ++i)
 {
-    std::cout<<nodes.Get(i)->GetDevice(0)->GetAddress()<< "is number: "<< i +"\n";
+    std::cout<<nodes.Get(i)->GetDevice(0)->GetAddress()<< "is number: "<< i << "\n";
 }
 
   // 9. Run simulation for 50 seconds

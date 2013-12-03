@@ -406,7 +406,6 @@ class MacLow : public Object
 {
 public:
 //Lee's modification starts ========================================================
-  void SetUsingLLTAlgo(bool enable){usingLLTBasedAlgo = enable;}
   void SetUsingLLTAlgo(bool enable, int numWaitingTimeSlot);
   std::map <Mac48Address, int64_t> * GetLLTMap(){return &LLTmap;}
   bool GetIsEarliest(){return isEarliestLLT;}
@@ -414,6 +413,8 @@ public:
   int  GetWaitingWindowSlots(){return waitingWindowSlot;}
   
   void CheckAlreadyWaited();
+  
+  Mac48Address previousEarliestLLT;
 
   Mac48Address CheckIsEarliest();
 //Lee's modification ends ==========================================================

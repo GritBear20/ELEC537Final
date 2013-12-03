@@ -39,6 +39,9 @@
 #include "ns3/simulator.h"
 #include "ns3/names.h"
 
+#include <iostream>
+#include <string>
+
 NS_LOG_COMPONENT_DEFINE ("WifiHelper");
 
 namespace ns3 {
@@ -132,6 +135,7 @@ WifiHelper::InstallLLT (const WifiPhyHelper &phyHelper,
 
       Ptr<WifiMac> mac = macHelper.Create ();
       mac->EnableLLTAlgo(waitingWindow, priorityWindow);
+
       Ptr<WifiPhy> phy = phyHelper.Create (node, device);
       mac->SetAddress (Mac48Address::Allocate ());
       mac->ConfigureStandard (m_standard);
@@ -142,7 +146,7 @@ WifiHelper::InstallLLT (const WifiPhyHelper &phyHelper,
       node->AddDevice (device);
       devices.Add (device);
       NS_LOG_DEBUG ("node=" << node << ", mob=" << node->GetObject<MobilityModel> ());
-    }
+   }
   return devices;
 }
 //Lee's modification ends =========================================================

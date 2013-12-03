@@ -35,6 +35,10 @@
 #include "edca-txop-n.h"
 #include "snr-tag.h"
 
+
+// cin with strings
+#include <iostream>
+#include <string>
 #include <algorithm>    // std::min_element, std::max_element
 
 NS_LOG_COMPONENT_DEFINE ("MacLow");
@@ -314,6 +318,23 @@ Mac48Address MacLow::CheckIsEarliest(){
   }
 
   curEarliestLLTAddress = min.first;
+
+/*
+  if(previousEarliestLLT == curEarliestLLTAddress){
+      //the earliest LLT node hasn't transmit for 2 rounds, must be not business
+      LLTmap.erase(previousEarliestLLT);
+      previousEarliestLLT == 0;
+      CheckIsEarliest();
+  }
+*/
+
+  //std::cout << "I'm: " << MacLow::GetAddress()<< " is " << isEarliestLLT << "\n";
+  //std::cout << curEarliestLLTAddress << " Is the Earliest \n";
+
+//a pause
+  //std::string mystr;
+  //getline (std::cin, mystr);
+
   return min.first;
 }
 
@@ -708,6 +729,17 @@ MacLow::ReceiveOk (Ptr<Packet> packet, double rxSnr, WifiMode txMode, WifiPreamb
   bool isPrevNavZero = IsNavZero ();
   NS_LOG_DEBUG ("duration/id=" << hdr.GetDuration ());
   NotifyNav (packet,hdr, txMode, preamble);
+      
+//Lee's modification starts ========================================================
+//update the LLTmap
+if (hdr.IsCts ()){
+      if (usingLLTBasedAlgo) {
+          LLTmap[hdr.GetAddr1()] = Simulator::Now().GetNanoSeconds(); 
+          MacLow::CheckIsEarliest();  
+      }
+}
+//Lee's modification ends ========================================================
+
   if (hdr.IsRts ())
     {
 //Lee's modification starts ========================================================
@@ -794,14 +826,6 @@ MacLow::ReceiveOk (Ptr<Packet> packet, double rxSnr, WifiMode txMode, WifiPreamb
            && m_ctsTimeoutEvent.IsRunning ()
            && m_currentPacket != 0)
     {
-      //Lee's modification starts ========================================================
-      //update the LLTmap
-      if (usingLLTBasedAlgo) {
-          LLTmap[m_self] = Simulator::Now().GetNanoSeconds(); 
-          MacLow::CheckIsEarliest();  
-      }
-      //Lee's modification ends ========================================================
-
       NS_LOG_DEBUG ("receive cts from=" << m_currentHdr.GetAddr1 ());
       SnrTag tag;
       packet->RemovePacketTag (tag);
