@@ -22,15 +22,15 @@ double experiment (bool enableCtsRts, double radius, int dataRateBPS, int simula
 
   // 1. Create 3 nodes 
   NodeContainer nodes;
-  nodes.Create (3);
+  nodes.Create (13);
 
   // 2. Place nodes somehow, this is required by every wireless simulation
-  for (int i = 0; i < 3; ++i)
+  for (int i = 0; i < 13; ++i)
     {
       nodes.Get (i)->AggregateObject (CreateObject<ConstantPositionMobilityModel> ());
         if(i>0){
-                nodes.Get(i)->GetObject<MobilityModel>()->SetPosition(Vector(cos((i-1)*2*3.14159265/2.0)*radius,
-			sin((i-1)*2*3.14159265/2.0)*radius,0.0));
+                nodes.Get(i)->GetObject<MobilityModel>()->SetPosition(Vector(cos((i-1)*2*3.14159265/12.0)*radius,
+			sin((i-1)*2*3.14159265/12.0)*radius,0.0));
         }else{
                 nodes.Get(0)->GetObject<MobilityModel>()->SetPosition(Vector(0.0,0.0,0.0));
         }
@@ -50,8 +50,7 @@ double experiment (bool enableCtsRts, double radius, int dataRateBPS, int simula
   wifiPhy.SetChannel (wifiChannel);
   NqosWifiMacHelper wifiMac = NqosWifiMacHelper::Default ();
   wifiMac.SetType ("ns3::AdhocWifiMac"); // use ad-hoc MAC
-  //NetDeviceContainer devices = wifi.Install (wifiPhy, wifiMac, nodes);
-  NetDeviceContainer devices = wifi.InstallLLT (wifiPhy, wifiMac, nodes, 8, 4);
+  NetDeviceContainer devices = wifi.Install (wifiPhy, wifiMac, nodes);
 
   // uncomment the following to have athstats output
   // AthstatsHelper athstats;
@@ -77,10 +76,10 @@ double experiment (bool enableCtsRts, double radius, int dataRateBPS, int simula
   onOffHelper.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
 
   // flow 1~12:  node 1~12 -> node 0
-  for(int i=1; i < 3; i++ )
+  for(int i=1; i < 13; i++ )
   {
         stringstream sstr ("");
-    	sstr << (dataRateBPS + 10 * (i-6)); //to make sure the average is still dataRateBPS
+    	sstr << (dataRateBPS + 10 * (i-1)); //to make sure the average is still dataRateBPS
 	string speedValue = sstr.str();
     	speedValue += "bps";
 
@@ -106,7 +105,7 @@ double experiment (bool enableCtsRts, double radius, int dataRateBPS, int simula
  // pingApps.Add (echoClientHelper.Install (nodes.Get (1))); 
  // echoClientHelper.SetAttribute ("StartTime", TimeValue (Seconds (0.006)));
  // pingApps.Add (echoClientHelper.Install (nodes.Get (2)));
-  for(size_t i=1;i<3;i++)
+  for(size_t i=1;i<13;i++)
   { echoClientHelper.SetAttribute ("StartTime", TimeValue (Seconds (0.001+0.005*(i-1))));
     pingApps.Add (echoClientHelper.Install (nodes.Get (i)));
 
@@ -115,12 +114,6 @@ double experiment (bool enableCtsRts, double radius, int dataRateBPS, int simula
   // 8. Install FlowMonitor on all nodes
   FlowMonitorHelper flowmon;
   Ptr<FlowMonitor> monitor = flowmon.InstallAll ();
-
-
-for (int i = 0; i < 3; ++i)
-{
-    std::cout<<nodes.Get(i)->GetDevice(0)->GetAddress()<< "is number: "<< i << "\n";
-}
 
   // 9. Run simulation for 50 seconds
   Simulator::Stop (Seconds (simulationTime));
@@ -137,7 +130,7 @@ for (int i = 0; i < 3; ++i)
     {
 
       // first 2 FlowIds are for ECHO apps, we don't want to display them
-      if (i->first > 2)
+      if (i->first > 12)
         {
           //Ipv4FlowClassifier::FiveTuple t = classifier->FindFlow (i->first);
           //std::cout << "Flow " << i->first - 12 << " (" << t.sourceAddress << " -> " << t.destinationAddress << ")\n";
@@ -150,9 +143,9 @@ for (int i = 0; i < 3; ++i)
     }
 
   double normalThroughtput = (double)(totalReceived * 8.0 / (double)simulationTime / 1000.0 / 1000.0)/2.0;
-  //std::cout << "Average Tx Bytes Per Flow:   " << (int)(totalTransimited/12.0 + 0.5) << "\n"; 
-  //std::cout << "Average Rx Bytes Per Flow:   " << (int)(totalReceived/12.0 + 0.5) << "\n";
-  //std::cout << "Normalized Average Throughput (y-axis):   " << normalThroughtput << "\n";
+  std::cout << "Average Tx Bytes Per Flow:   " << (int)(totalTransimited/12.0 + 0.5) << "\n"; 
+  std::cout << "Average Rx Bytes Per Flow:   " << (int)(totalReceived/12.0 + 0.5) << "\n";
+  std::cout << "Normalized Average Throughput (y-axis):   " << normalThroughtput << "\n";
 
   // 11. Cleanup
   Simulator::Destroy ();
@@ -166,33 +159,33 @@ double  normalizedTotalCarriedload_xaxis(double dataRateBPS){
 }
 
 void outputSimulationParameter(double radius, int dataRateBPS, int simulationTime, int packetSize){
-	std::cout << "Node Distance(M): "<< ((int)radius) << "; DataRate(BPS): " <<dataRateBPS << "; Time: " <<simulationTime<<"; Packet size: "<<packetSize<< "\n";
+	std::cout << "Node Distance(M): "<< ((int)radius) << "; DataRate(BPS): " <<dataRateBPS << "; Time: " <<simulationTime<<"; Packet size: "<<packetSize;
 }
 
 int main (int argc, char **argv)
 {
   double x;
   double y;
-  int dataRate;
-  int dataRateList[10]  = {1000,10000,50000,100000,250000,500000,1000000,3000000,6000000,12000000};
-  SeedManager::SetRun (3);  // Changes run number from default of 1 to 7
-  
-  for(int i = 2; i < 10; i++){
-  	dataRate = dataRateList[i];
-	  outputSimulationParameter(80, dataRate, 5,1000);
-	  //void experiment (bool enableCtsRts, double radius, int dataRateBPS, int simulationTime, int packetSize)
-	  y = experiment (true, 80, dataRate, 5,1000);
-	  x = normalizedTotalCarriedload_xaxis(dataRate);
-	  std::cout << "X-axis: " << x << " ;Y-axis: " << y << "\n";
-          std::cout << "------------------------------------------------\n";
-  }
-/*
+  int pktsiz[10]={200,400,600,800,1000,1200,1400,1600,1800,2000};
+  int i;
+  SeedManager::SetRun (7);  // Changes run number from default of 1 to 7
+  for(i=0;i<10;i++)
+  {
+  std::cout << "RTS/CTS disabled:\n" << std::flush;
+  outputSimulationParameter(5, 3000000, 50,pktsiz[i]);
+  //void experiment (bool enableCtsRts, double radius, int dataRateBPS, int simulationTime, int packetSize)
+  y = experiment (false, 5, 100000, 50,pktsiz[i]);
+  x = normalizedTotalCarriedload_xaxis(100055);
+  std::cout << "X-axis: " << x << " ;Y-axis: " << y << "\n";
+
   std::cout << "------------------------------------------------\n";
   std::cout << "RTS/CTS enabled:\n";
-  outputSimulationParameter(5, dataRate, 50,1000);
-  y = experiment (true, 5, dataRate, 50,1000);
-  x = normalizedTotalCarriedload_xaxis(dataRate);
-  std::cout << "X-axis: " << x << " ;Y-axis: " << y << "\n";
-*/
+  outputSimulationParameter(5, 3000000, 50,pktsiz[i]);
+  y = experiment (true, 5, 100000, 50,pktsiz[i]);
+  x = normalizedTotalCarriedload_xaxis(100055);
+  std::cout << "X-axis: " << x << " ;Y-axis: " << y << "\n"<<"\n";
+  }
+
   return 0;
 }
+
