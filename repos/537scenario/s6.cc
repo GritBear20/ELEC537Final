@@ -34,14 +34,14 @@ void experiment (bool enableCtsRts,int dataRateBPS,int simulationTime, int packe
 
 // 3. Create propagation loss matrix
   Ptr<MatrixPropagationLossModel> lossModel = CreateObject<MatrixPropagationLossModel> ();
-  lossModel->SetDefaultLoss (0); // set default loss to 200 dB (no link)
-  lossModel->SetLoss (nodes.Get (0)->GetObject<MobilityModel>(), nodes.Get (1)->GetObject<MobilityModel>(), 0); 
-  lossModel->SetLoss (nodes.Get (0)->GetObject<MobilityModel>(), nodes.Get (2)->GetObject<MobilityModel>(), 0); 
- 
-  lossModel->SetLoss (nodes.Get (1)->GetObject<MobilityModel>(), nodes.Get (3)->GetObject<MobilityModel>(), 0); 
- 
+  lossModel->SetDefaultLoss (200); // set default loss to 200 dB (no link)
+  lossModel->SetLoss (nodes.Get (0)->GetObject<MobilityModel>(), nodes.Get (1)->GetObject<MobilityModel>(), 0);
+  lossModel->SetLoss (nodes.Get (0)->GetObject<MobilityModel>(), nodes.Get (2)->GetObject<MobilityModel>(), 0);
+
+  lossModel->SetLoss (nodes.Get (1)->GetObject<MobilityModel>(), nodes.Get (3)->GetObject<MobilityModel>(), 0);
+
   lossModel->SetLoss (nodes.Get (2)->GetObject<MobilityModel>(), nodes.Get (3)->GetObject<MobilityModel>(), 0); // set symmetric loss 2 <-> 1 to 50 dB
-  
+
   // 4. Create & setup wifi channel
   Ptr<YansWifiChannel> wifiChannel = CreateObject <YansWifiChannel> ();
   wifiChannel->SetPropagationLossModel (lossModel);
@@ -155,18 +155,18 @@ void experiment (bool enableCtsRts,int dataRateBPS,int simulationTime, int packe
 
   // 11. Cleanup
   Simulator::Destroy ();
-  
+
 }
 
 
 int main (int argc, char **argv)
 {
-  
+
 
   std::cout << "RTS/CTS enabled:\n";
 
   experiment (true,3000000, 50,1000);
-   
+
 
   return 0;
 }
