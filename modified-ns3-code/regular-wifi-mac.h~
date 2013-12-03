@@ -56,11 +56,6 @@ class DcfManager;
 class RegularWifiMac : public WifiMac
 {
 public:
-//Lee's modification starts ========================================================
-  void EnableLLTAlgo(Time waitingWindow, int prioritySlots);
-  void DisableLLTAlgo();
-//Lee's modification ends =========================================================
-
   static TypeId GetTypeId (void);
 
   RegularWifiMac ();

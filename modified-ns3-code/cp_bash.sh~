@@ -1,4 +1,4 @@
-cp -f {dcf-manager.h,regular-wifi-mac.h,mac-low.h,wifi-helper.h,wifi-mac.h} ../repos/ns-3-allinone/ns-3-dev/build/ns3/
+cp -f {dcf-manager.h,regular-wifi-mac.h,mac-low.h,wifi-helper.h, wifi-mac.h} ../repos/ns-3-allinone/ns-3-dev/build/ns3/
 cp -f {dcf-manager.h,regular-wifi-mac.h,mac-low.h,dcf-manager.cc,regular-wifi-mac.cc,mac-low.cc,wifi-mac.h,wifi-mac.cc} ../repos/ns-3-allinone/ns-3-dev/src/wifi/model/
 
 cp -f {wifi-helper.h,wifi-helper.cc} ../repos/ns-3-allinone/ns-3-dev/src/wifi/helper/

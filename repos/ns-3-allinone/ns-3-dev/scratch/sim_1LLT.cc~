@@ -50,7 +50,7 @@ double experiment (bool enableCtsRts, double radius, int dataRateBPS, int simula
   wifiPhy.SetChannel (wifiChannel);
   NqosWifiMacHelper wifiMac = NqosWifiMacHelper::Default ();
   wifiMac.SetType ("ns3::AdhocWifiMac"); // use ad-hoc MAC
-  wifiMac.
+  wifiMac
   NetDeviceContainer devices = wifi.Install (wifiPhy, wifiMac, nodes);
 
   // uncomment the following to have athstats output

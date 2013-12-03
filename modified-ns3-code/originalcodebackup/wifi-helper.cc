@@ -118,36 +118,6 @@ WifiHelper::Install (const WifiPhyHelper &phyHelper,
   return devices;
 }
 
-//Lee's modification starts ========================================================
-NetDeviceContainer 
-WifiHelper::InstallLLT (const WifiPhyHelper &phyHelper,
-                     const WifiMacHelper &macHelper, NodeContainer c, int waitingWindow, int priorityWindow) const
-{
-  NetDeviceContainer devices;
-  for (NodeContainer::Iterator i = c.Begin (); i != c.End (); ++i)
-    {
-      Ptr<Node> node = *i;
-      Ptr<WifiNetDevice> device = CreateObject<WifiNetDevice> ();
-      Ptr<WifiRemoteStationManager> manager = m_stationManager.Create<WifiRemoteStationManager> ();
-
-      Ptr<WifiMac> mac = macHelper.Create ();
-      mac->EnableLLTAlgo(waitingWindow, priorityWindow);
-      Ptr<WifiPhy> phy = phyHelper.Create (node, device);
-      mac->SetAddress (Mac48Address::Allocate ());
-      mac->ConfigureStandard (m_standard);
-      phy->ConfigureStandard (m_standard);
-      device->SetMac (mac);
-      device->SetPhy (phy);
-      device->SetRemoteStationManager (manager);
-      node->AddDevice (device);
-      devices.Add (device);
-      NS_LOG_DEBUG ("node=" << node << ", mob=" << node->GetObject<MobilityModel> ());
-    }
-  return devices;
-}
-//Lee's modification ends =========================================================
-
-
 NetDeviceContainer
 WifiHelper::Install (const WifiPhyHelper &phy,
                      const WifiMacHelper &mac, Ptr<Node> node) const
