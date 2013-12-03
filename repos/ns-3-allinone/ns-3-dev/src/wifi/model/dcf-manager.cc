@@ -47,6 +47,13 @@ DcfState::DcfState ()
     m_cw (0),
     m_accessRequested (false)
 {
+
+//Lee's modification starts ========================================================
+  usingLLTBasedAlgo = false;
+  isEarliestLLT = false;
+  alreadyWaited = false;
+//Lee's modification ends ==========================================================
+
 }
 
 DcfState::~DcfState ()
@@ -89,13 +96,46 @@ DcfState::GetCwMax (void) const
 void
 DcfState::ResetCw (void)
 {
-  m_cw = m_cwMin;
+//Lee's modification starts =====================================================
+  if(!usingLLTBasedAlgo){
+//Lee's modification ends =====================================================
+    
+    m_cw = m_cwMin;
+
+//Lee's modification starts =====================================================
+  }else{
+    CheckIsEarliestLLT();
+    if (isEarliestLLT) {
+      m_cw = prioritySlots;
+    }else{
+        //normal contention window RESET (waiting is handled in the StartBackoffNow
+        m_cw = m_cwMin;   
+    } 
+  }
+//Lee's modification ends =======================================================
 }
 void
 DcfState::UpdateFailedCw (void)
 {
+//Lee's modification starts ========================================================
+  if(!usingLLTBasedAlgo){
+//Lee's modification ends =========================================================
+
   // see 802.11-2007, section 9.9.1.5
   m_cw = std::min ( 2 * (m_cw + 1) - 1, m_cwMax);
+
+//Lee's modification starts =====================================================
+  }else{
+    CheckIsEarliestLLT();
+    if (isEarliestLLT) {
+      m_cw = prioritySlots;
+    }else{
+      //normal contention
+      m_cw = std::min ( 2 * (m_cw + 1) - 1, m_cwMax);  
+    } 
+  }
+//Lee's modification ends =======================================================
+
 }
 void
 DcfState::UpdateBackoffSlotsNow (uint32_t nSlots, Time backoffUpdateBound)
@@ -108,10 +148,24 @@ DcfState::UpdateBackoffSlotsNow (uint32_t nSlots, Time backoffUpdateBound)
 void
 DcfState::StartBackoffNow (uint32_t nSlots)
 {
-  NS_ASSERT (m_backoffSlots == 0);
-  MY_DEBUG ("start backoff=" << nSlots << " slots");
-  m_backoffSlots = nSlots;
-  m_backoffStart = Simulator::Now ();
+//Lee's modification starts ========================================================
+  if(!usingLLTBasedAlgo){
+//Lee's modification ends =========================================================
+
+          NS_ASSERT (m_backoffSlots == 0);
+          MY_DEBUG ("start backoff=" << nSlots << " slots");
+          m_backoffSlots = nSlots;
+          m_backoffStart = Simulator::Now ();
+
+//Lee's modification starts ========================================================
+  }else{
+        CheckAlreadyWaited();
+        if (!alreadyWaited && !isEarliestLLT) {
+            //wait
+            m_backoffSlots = nSlots + m_low->GetWaitingWindowSlots();
+        }
+  }
+//Lee's modification ends   ========================================================
 }
 
 uint32_t
@@ -273,6 +327,11 @@ DcfManager::DcfManager ()
     m_lowListener (0)
 {
   NS_LOG_FUNCTION (this);
+//Lee's modification starts ========================================================
+  m_low = NULL;
+  usingLLTBasedAlgo = false;
+//Lee's modification ends ==========================================================
+
 }
 
 DcfManager::~DcfManager ()
@@ -336,6 +395,13 @@ DcfManager::Add (DcfState *dcf)
 {
   NS_LOG_FUNCTION (this << dcf);
   m_states.push_back (dcf);
+
+//Lee's modification starts ========================================================
+//by-pass the low listener (fast but non-elegant solution) 
+  dcf->usingLLTBasedAlgo = usingLLTBasedAlgo;
+  dcf->m_low = m_low;
+  dcf->prioritySlots = prioritySlots;
+//Lee's modification starts ========================================================
 }
 
 Time

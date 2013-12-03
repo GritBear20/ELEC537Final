@@ -18,11 +18,23 @@
  * Author: Mathieu Lacage <mathieu.lacage@sophia.inria.fr>
  */
 
+//please look for the following sections
+//Lee's modification starts ========================================================
+// some codes
+//e.g.
+//  void SetUsingLLTAlgo(bool enable){usingLLTBasedAlgo = enable;}
+//  void SetIsEarliestLLT(bool isEarlist){isEarliestLLT = isEarlist;}
+//  void sendAlreadyWaitedSignal();
+//  and fields...
+//Lee's modification ends ==========================================================
+
+
 #ifndef DCF_MANAGER_H
 #define DCF_MANAGER_H
 
 #include "ns3/nstime.h"
 #include "ns3/event-id.h"
+#include "ns3/mac-low.h"
 #include <vector>
 
 namespace ns3 {
@@ -46,6 +58,18 @@ class LowDcfListener;
 class DcfState
 {
 public:
+
+//Lee's modification starts ========================================================
+  void CheckIsEarliestLLT(){
+        m_low->CheckIsEarliest();
+        isEarliestLLT = m_low->GetIsEarliest();
+  }
+  void CheckAlreadyWaited(){
+        m_low->CheckAlreadyWaited();
+        alreadyWaited = m_low->GetAlreadyWaited();
+  }
+//Lee's modification ends ==========================================================
+
   DcfState ();
 
   virtual ~DcfState ();
@@ -94,6 +118,14 @@ public:
   bool IsAccessRequested (void) const;
 
 private:
+//Lee's modification starts ========================================================
+  Ptr<ns3::MacLow> m_low;
+  bool usingLLTBasedAlgo;
+  bool isEarliestLLT;
+  bool alreadyWaited;
+  int prioritySlots;
+//Lee's modification ends ==========================================================
+
   friend class DcfManager;
 
   uint32_t GetBackoffSlots (void) const;
@@ -173,6 +205,28 @@ private:
 class DcfManager
 {
 public:
+//Lee's modification starts ========================================================
+  void SetUsingLLTAlgo(bool enable, int prioritySlotsNum){
+        usingLLTBasedAlgo = enable;
+        prioritySlots = prioritySlotsNum;
+        for (States::iterator i = m_states.begin (); i != m_states.end (); i++)
+            {
+                DcfState *state = *i;
+                state->usingLLTBasedAlgo = enable;state->prioritySlots = prioritySlotsNum;
+            }
+  }
+
+  void SetMacLow(Ptr<ns3::MacLow> mlow){
+        m_low = mlow;
+        for (States::iterator i = m_states.begin (); i != m_states.end (); i++)
+            {
+                DcfState *state = *i;
+                state->m_low = mlow;
+            }
+        
+  }
+//Lee's modification ends ==========================================================
+
   DcfManager ();
   ~DcfManager ();
 
@@ -285,6 +339,14 @@ public:
   void NotifyCtsTimeoutStartNow (Time duration);
   void NotifyCtsTimeoutResetNow ();
 private:
+
+//Lee's modification starts ========================================================
+//by-pass the low listener (fast but non-elegant solution) 
+  Ptr<ns3::MacLow> m_low;
+  bool usingLLTBasedAlgo;
+  int prioritySlots;
+//Lee's modification starts ========================================================
+
   void UpdateBackoff (void);
   Time MostRecent (Time a, Time b) const;
   Time MostRecent (Time a, Time b, Time c) const;

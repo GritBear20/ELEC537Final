@@ -135,7 +135,6 @@ WifiHelper::InstallLLT (const WifiPhyHelper &phyHelper,
 
       Ptr<WifiMac> mac = macHelper.Create ();
       mac->EnableLLTAlgo(waitingWindow, priorityWindow);
-
       Ptr<WifiPhy> phy = phyHelper.Create (node, device);
       mac->SetAddress (Mac48Address::Allocate ());
       mac->ConfigureStandard (m_standard);

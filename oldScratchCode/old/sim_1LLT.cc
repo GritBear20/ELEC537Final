@@ -22,15 +22,15 @@ double experiment (bool enableCtsRts, double radius, int dataRateBPS, int simula
 
   // 1. Create 3 nodes 
   NodeContainer nodes;
-  nodes.Create (13);
+  nodes.Create (3);
 
   // 2. Place nodes somehow, this is required by every wireless simulation
-  for (int i = 0; i < 13; ++i)
+  for (int i = 0; i < 3; ++i)
     {
       nodes.Get (i)->AggregateObject (CreateObject<ConstantPositionMobilityModel> ());
         if(i>0){
-                nodes.Get(i)->GetObject<MobilityModel>()->SetPosition(Vector(cos((i-1)*2*3.14159265/12.0)*radius,
-			sin((i-1)*2*3.14159265/12.0)*radius,0.0));
+                nodes.Get(i)->GetObject<MobilityModel>()->SetPosition(Vector(cos((i-1)*2*3.14159265/2.0)*radius,
+			sin((i-1)*2*3.14159265/2.0)*radius,0.0));
         }else{
                 nodes.Get(0)->GetObject<MobilityModel>()->SetPosition(Vector(0.0,0.0,0.0));
         }
@@ -50,7 +50,10 @@ double experiment (bool enableCtsRts, double radius, int dataRateBPS, int simula
   wifiPhy.SetChannel (wifiChannel);
   NqosWifiMacHelper wifiMac = NqosWifiMacHelper::Default ();
   wifiMac.SetType ("ns3::AdhocWifiMac"); // use ad-hoc MAC
-  NetDeviceContainer devices = wifi.Install (wifiPhy, wifiMac, nodes);
+  //NetDeviceContainer devices = wifi.InstallLLT (wifiPhy, wifiMac, nodes,8,4);
+  NetDeviceContainer devices = wifi.Install(wifiPhy, wifiMac, nodes);
+
+
 
   // uncomment the following to have athstats output
   // AthstatsHelper athstats;
@@ -115,12 +118,6 @@ double experiment (bool enableCtsRts, double radius, int dataRateBPS, int simula
   FlowMonitorHelper flowmon;
   Ptr<FlowMonitor> monitor = flowmon.InstallAll ();
 
-
-for (int i = 0; i < 3; ++i)
-{
-    std::cout<<nodes.Get(i)->GetDevice(0)->GetAddress()<< "is number: "<< i +"\n";
-}
-
   // 9. Run simulation for 50 seconds
   Simulator::Stop (Seconds (simulationTime));
   Simulator::Run ();
@@ -176,7 +173,7 @@ int main (int argc, char **argv)
   int dataRateList[10]  = {1000,10000,50000,100000,250000,500000,1000000,3000000,6000000,12000000};
   SeedManager::SetRun (3);  // Changes run number from default of 1 to 7
   
-  for(int i = 4; i < 8; i++){
+  for(int i = 6; i < 7; i++){
   	dataRate = dataRateList[i];
 	  //std::cout << "RTS/CTS disabled:\n" << std::flush;
 	  outputSimulationParameter(80, dataRate, 10,1000);

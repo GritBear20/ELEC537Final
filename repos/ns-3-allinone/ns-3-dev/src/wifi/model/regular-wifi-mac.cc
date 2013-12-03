@@ -38,6 +38,20 @@ NS_LOG_COMPONENT_DEFINE ("RegularWifiMac");
 
 namespace ns3 {
 
+//Lee's modification starts ========================================================
+void RegularWifiMac::EnableLLTAlgo(int waitingWindow, int prioritySlots){
+    //set dcf-manager and mac-low LLT algo to true
+    m_dcfManager->SetUsingLLTAlgo(true, prioritySlots);
+    m_low->SetUsingLLTAlgo(true, waitingWindow);
+}
+
+void RegularWifiMac::DisableLLTAlgo(){
+    //set dcf-manager and mac-low LLT algo to false
+    m_dcfManager->SetUsingLLTAlgo(false, 0);
+    m_low->SetUsingLLTAlgo(false, 0);
+}
+//Lee's modification ends ==========================================================
+
 NS_OBJECT_ENSURE_REGISTERED (RegularWifiMac);
 
 RegularWifiMac::RegularWifiMac ()
@@ -59,6 +73,12 @@ RegularWifiMac::RegularWifiMac ()
   m_dca->SetManager (m_dcfManager);
   m_dca->SetTxOkCallback (MakeCallback (&RegularWifiMac::TxOk, this));
   m_dca->SetTxFailedCallback (MakeCallback (&RegularWifiMac::TxFailed, this));
+
+//Lee's modification starts ========================================================
+//link Mac Low and DcfManager and by-pass the listener for LLT algo
+  m_dcfManager->SetMacLow(m_low);
+  RegularWifiMac::DisableLLTAlgo();
+//Lee's modification ends   ========================================================
 
   // Construct the EDCAFs. The ordering is important - highest
   // priority (see Table 9-1 in IEEE 802.11-2007) must be created

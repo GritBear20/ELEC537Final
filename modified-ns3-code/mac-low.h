@@ -40,6 +40,7 @@
 #include <stdint.h>
 #include <ostream>
 #include <map>
+#include <time.h>
 
 #include "wifi-mac-header.h"
 #include "wifi-mode.h"
@@ -386,6 +387,16 @@ private:
 
 std::ostream &operator << (std::ostream &os, const MacLowTransmissionParameters &params);
 
+//Lee's modification starts ========================================================
+typedef std::pair<Mac48Address, int64_t> MyPairType;
+struct CompareSecond
+{
+    bool operator()(const MyPairType& left, const MyPairType& right) const
+    {
+        return left.second < right.second;
+    }
+};
+//Lee's modification ends ==========================================================
 
 /**
  * \ingroup wifi
@@ -395,13 +406,15 @@ class MacLow : public Object
 {
 public:
 //Lee's modification starts ========================================================
-  void SetUsingLLTAlgo(bool enable){usingLLTBasedAlgo = enable;}
-  std::map <Mac48Address, float> * GetLLTMap(){return &aLLTmap;}
-  void SendIsEarlistSignal(){dcfManager->SetIsEarliestLLT(isEarliestLLT);}
-  void SetAlreadyWaited(bool it_alreadyWaited){alreadyWaited = it_alreadyWaited;}
-  void SetDcfManager(DcfManager * adcfManager){dcfManager = adcfManager;}
+  void SetUsingLLTAlgo(bool enable, int numWaitingTimeSlot);
+  std::map <Mac48Address, int64_t> * GetLLTMap(){return &LLTmap;}
+  bool GetIsEarliest(){return isEarliestLLT;}
+  bool GetAlreadyWaited(){return alreadyWaited;}
+  int  GetWaitingWindowSlots(){return waitingWindowSlot;}
+  
+  void CheckAlreadyWaited();
 
-  void CheckIsEarliest();
+  Mac48Address CheckIsEarliest();
 //Lee's modification ends ==========================================================
 
 
@@ -544,8 +557,17 @@ private:
   bool usingLLTBasedAlgo;
   bool isEarliestLLT;
   bool alreadyWaited;
-  std::map <Mac48Address, float> LLTmap;
-  DcfManager * dcfManager;
+  
+  int waitingWindowSlot;
+  Time waitingWindow;
+  Time LLTfinished;
+
+  std::map <Mac48Address, int64_t> LLTmap;
+
+  timespec * tspec;
+  Mac48Address curEarliestLLTAddress;
+
+  void SetUsingLLTAlgo(bool enable, Time waitingWindowTime);
 //Lee's modification ends ==========================================================
 
 
@@ -596,10 +618,21 @@ private:
   void BlockAckTimeout (void);
   void CtsTimeout (void);
   void SendCtsToSelf (void);
+
+//AP updates LLT time table =======================
   void SendCtsAfterRts (Mac48Address source, Time duration, WifiMode txMode, double rtsSnr);
+//=================================================
+
+//needs to have a signature as AP =================
   void SendAckAfterData (Mac48Address source, Time duration, WifiMode txMode, double rtsSnr);
+//=================================================
+
   void SendDataAfterCts (Mac48Address source, Time duration, WifiMode txMode);
+
+//need to have a sigature as Client ===========
   void WaitSifsAfterEndTx (void);
+//=============================================
+
   void EndTxNoAck (void);
 
   void SendRtsForPacket (void);

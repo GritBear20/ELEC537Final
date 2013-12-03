@@ -142,6 +142,14 @@ public:
    */
   NetDeviceContainer Install (const WifiPhyHelper &phy,
                               const WifiMacHelper &mac, NodeContainer c) const;
+
+
+//Lee's modification starts ========================================================
+  NetDeviceContainer InstallLLT (const WifiPhyHelper &phyHelper,
+                     const WifiMacHelper &macHelper, NodeContainer c, int waitingWindow, int priorityWindow) const;
+//Lee's modification ends =========================================================
+
+
   /**
    * \param phy the PHY helper to create PHY objects
    * \param mac the MAC helper to create MAC objects

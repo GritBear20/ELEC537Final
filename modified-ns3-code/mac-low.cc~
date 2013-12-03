@@ -35,6 +35,12 @@
 #include "edca-txop-n.h"
 #include "snr-tag.h"
 
+
+// cin with strings
+#include <iostream>
+#include <string>
+#include <algorithm>    // std::min_element, std::max_element
+
 NS_LOG_COMPONENT_DEFINE ("MacLow");
 
 #undef NS_LOG_APPEND_CONTEXT
@@ -283,14 +289,64 @@ private:
 
 
 //Lee's modification starts ========================================================
-//TODO
-void MacLow::CheckIsEarliest(){
-  //check if the time of itself is the lowest
-
-
-  isEarliestLLT = false;
+void MacLow::SetUsingLLTAlgo(bool enable, int numWaitingTimeSlot){
+    waitingWindowSlot = numWaitingTimeSlot;
+    uint64_t nanoSeconds = numWaitingTimeSlot * MacLow::GetSlotTime().GetNanoSeconds();
+    SetUsingLLTAlgo(enable, NanoSeconds(nanoSeconds));
 }
 
+void MacLow::SetUsingLLTAlgo(bool enable, Time waitingWindowTime){
+  usingLLTBasedAlgo = enable;
+  waitingWindow = waitingWindowTime;
+
+  if ( !LLTmap.empty()) {
+    //initialize itself within the map
+    Time curTime = Simulator::Now();
+    LLTmap[MacLow::GetAddress()] = curTime.GetNanoSeconds();
+  }
+}
+
+Mac48Address MacLow::CheckIsEarliest(){
+  //check if the time of itself is the lowest
+  std::pair<Mac48Address, int64_t> min 
+      = *std::min_element(LLTmap.begin(), LLTmap.end(), CompareSecond());
+
+  if(min.first == MacLow::GetAddress()){
+    isEarliestLLT = true;
+  }else{
+    isEarliestLLT = false;
+  }
+
+  curEarliestLLTAddress = min.first;
+
+/*
+  if(previousEarliestLLT == curEarliestLLTAddress){
+      //the earliest LLT node hasn't transmit for 2 rounds, must be not business
+      LLTmap.erase(previousEarliestLLT);
+      previousEarliestLLT == 0;
+      CheckIsEarliest();
+  }
+*/
+
+  //std::cout << "I'm: " << MacLow::GetAddress()<< " is " << isEarliestLLT << "\n";
+  //std::cout << curEarliestLLTAddress << " Is the Earliest \n";
+
+//a pause
+  //std::string mystr;
+  //getline (std::cin, mystr);
+
+  return min.first;
+}
+
+void MacLow::CheckAlreadyWaited(){
+    Time curTime = Simulator::Now();
+    int64_t time_elapsed = curTime.GetNanoSeconds() - LLTfinished.GetNanoSeconds();
+    if(time_elapsed >= waitingWindow.GetNanoSeconds()){
+        alreadyWaited = true;
+    }else{
+        alreadyWaited = false;
+    }
+}
 //Lee's modification ends ==========================================================
 
 MacLow::MacLow ()
@@ -316,9 +372,9 @@ MacLow::MacLow ()
 //Lee's modification starts ========================================================
 //default not using LLT
   usingLLTBasedAlgo = false;
-  isEarlist = false;
-  alreadyWaited false;
-  LLTmap = new std::map <Mac48Address, float>();
+  isEarliestLLT = false;
+  alreadyWaited = false;
+  LLTfinished = Simulator::Now();  
 //Lee's modification ends ==========================================================
 }
 
@@ -673,8 +729,70 @@ MacLow::ReceiveOk (Ptr<Packet> packet, double rxSnr, WifiMode txMode, WifiPreamb
   bool isPrevNavZero = IsNavZero ();
   NS_LOG_DEBUG ("duration/id=" << hdr.GetDuration ());
   NotifyNav (packet,hdr, txMode, preamble);
+      
+//Lee's modification starts ========================================================
+//update the LLTmap
+if (hdr.IsCts ())
+      if (usingLLTBasedAlgo) {
+          LLTmap[hdr.GetAddr1()] = Simulator::Now().GetNanoSeconds(); 
+          MacLow::CheckIsEarliest();  
+      }
+}
+//Lee's modification ends ========================================================
+
   if (hdr.IsRts ())
     {
+//Lee's modification starts ========================================================
+        if (usingLLTBasedAlgo) {
+            MacLow::CheckAlreadyWaited();
+                if(alreadyWaited){
+                         if (isPrevNavZero
+                                && hdr.GetAddr1 () == m_self)
+                        {
+                          NS_LOG_DEBUG ("rx RTS from=" << hdr.GetAddr2 () << ", schedule CTS");
+                          NS_ASSERT (m_sendCtsEvent.IsExpired ());
+                          m_stationManager->ReportRxOk (hdr.GetAddr2 (), &hdr,
+                                                        rxSnr, txMode);
+                          m_sendCtsEvent = Simulator::Schedule (GetSifs (),
+                                                                &MacLow::SendCtsAfterRts, this,
+                                                                hdr.GetAddr2 (),
+                                                                hdr.GetDuration (),
+                                                                txMode,
+                                                                rxSnr);
+                        }
+                      else
+                        {
+                          NS_LOG_DEBUG ("rx RTS from=" << hdr.GetAddr2 () << ", cannot schedule CTS");
+                        }
+                }else{
+                        CheckIsEarliest();
+                        //start waiting
+                        //only sent to the earliest LLT
+                        if(curEarliestLLTAddress == hdr.GetAddr2 ()){
+                            if (isPrevNavZero
+                                && hdr.GetAddr1 () == m_self)
+                                {
+                                  NS_LOG_DEBUG ("rx RTS from=" << hdr.GetAddr2 () << ", schedule CTS");
+                                  NS_ASSERT (m_sendCtsEvent.IsExpired ());
+                                  m_stationManager->ReportRxOk (hdr.GetAddr2 (), &hdr,
+                                                                rxSnr, txMode);
+                                  m_sendCtsEvent = Simulator::Schedule (GetSifs (),
+                                                                        &MacLow::SendCtsAfterRts, this,
+                                                                        hdr.GetAddr2 (),
+                                                                        hdr.GetDuration (),
+                                                                        txMode,
+                                                                        rxSnr);
+                                }
+                              else
+                                {
+                                  NS_LOG_DEBUG ("rx RTS from=" << hdr.GetAddr2 () << ", cannot schedule CTS");
+                                }     
+                        }
+                }
+        }else{
+//Lee's modification ends   ========================================================
+
+
       /* see section 9.2.5.7 802.11-1999
        * A STA that is addressed by an RTS frame shall transmit a CTS frame after a SIFS
        * period if the NAV at the STA receiving the RTS frame indicates that the medium is
@@ -699,6 +817,9 @@ MacLow::ReceiveOk (Ptr<Packet> packet, double rxSnr, WifiMode txMode, WifiPreamb
         {
           NS_LOG_DEBUG ("rx RTS from=" << hdr.GetAddr2 () << ", cannot schedule CTS");
         }
+//Lee's modification starts ========================================================
+      }
+//Lee's modification ends ========================================================
     }
   else if (hdr.IsCts ()
            && hdr.GetAddr1 () == m_self
@@ -1620,6 +1741,14 @@ MacLow::SendCtsToSelf (void)
 void
 MacLow::SendCtsAfterRts (Mac48Address source, Time duration, WifiMode rtsTxMode, double rtsSnr)
 {
+        //Lee's modification starts ========================================================
+        //update the LLTmap
+        if (usingLLTBasedAlgo) {
+          LLTmap[source] = Simulator::Now().GetNanoSeconds(); 
+          MacLow::CheckIsEarliest();  
+        }
+        //Lee's modification ends ========================================================
+
   NS_LOG_FUNCTION (this << source << duration << rtsTxMode << rtsSnr);
   /* send a CTS when you receive a RTS
    * right after SIFS.
@@ -1697,6 +1826,13 @@ MacLow::SendDataAfterCts (Mac48Address source, Time duration, WifiMode txMode)
 void
 MacLow::WaitSifsAfterEndTx (void)
 {
+  //Lee's modification starts ==========================================================
+if (usingLLTBasedAlgo) {
+  LLTfinished = Simulator::Now();
+  alreadyWaited = false;
+}
+  //Lee's modification ends ============================================================
+
   m_listener->StartNext ();
 }
 
@@ -1754,6 +1890,13 @@ MacLow::SendAckAfterData (Mac48Address source, Time duration, WifiMode dataTxMod
   else
     preamble=WIFI_PREAMBLE_LONG;
   ForwardDown (packet, &ack, ackTxVector, preamble);
+
+  //Lee's modification starts ==========================================================
+if (usingLLTBasedAlgo) {
+  LLTfinished = Simulator::Now();
+  alreadyWaited = false;
+}
+  //Lee's modification ends ============================================================
 }
 
 bool

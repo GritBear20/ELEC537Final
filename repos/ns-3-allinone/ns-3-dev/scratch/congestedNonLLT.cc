@@ -118,7 +118,7 @@ double experiment (bool enableCtsRts, double radius, int dataRateBPS, int simula
 
 for (int i = 0; i < 3; ++i)
 {
-    std::cout<<nodes.Get(i)->GetDevice(0)->GetAddress()<< "is number: "<< i +"\n";
+    std::cout<<nodes.Get(i)->GetDevice(0)->GetAddress()<< "is number: "<< i << "\n";
 }
 
   // 9. Run simulation for 50 seconds
