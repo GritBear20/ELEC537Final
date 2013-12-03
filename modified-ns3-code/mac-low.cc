@@ -328,18 +328,20 @@ Mac48Address MacLow::CheckIsEarliest(){
   }
 */
 
-  //std::cout << "I'm: " << MacLow::GetAddress()<< " is " << isEarliestLLT << "\n";
-  //std::cout << curEarliestLLTAddress << " Is the Earliest \n";
-
+  std::cout << "I'm: " << MacLow::GetAddress()<< " is " << isEarliestLLT << "\n";
+  std::cout << curEarliestLLTAddress << " Is the Earliest \n";
+  std::cout << "current time:" << Simulator::Now().GetNanoSeconds() <<"\n";
 //a pause
-  //std::string mystr;
-  //getline (std::cin, mystr);
+  std::string mystr;
+  getline (std::cin, mystr);
 
   return min.first;
 }
 
 void MacLow::CheckAlreadyWaited(){
     Time curTime = Simulator::Now();
+    //std::cout<<"\n WaitingWindow! : "<<waitingWindowSlot;
+
     int64_t time_elapsed = curTime.GetNanoSeconds() - LLTfinished.GetNanoSeconds();
     if(time_elapsed >= waitingWindow.GetNanoSeconds()){
         alreadyWaited = true;

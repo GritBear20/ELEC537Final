@@ -23,6 +23,8 @@
 #include "ns3/simulator.h"
 #include <cmath>
 
+#include <iostream>
+
 #include "dcf-manager.h"
 #include "wifi-phy.h"
 #include "wifi-mac.h"
@@ -105,7 +107,8 @@ DcfState::ResetCw (void)
 //Lee's modification starts =====================================================
   }else{
     CheckIsEarliestLLT();
-    if (isEarliestLLT) {
+    if (isEarliestLLT) { 
+      //std::cout<<"\n Priority! : "<<prioritySlots;
       m_cw = prioritySlots;
     }else{
         //normal contention window RESET (waiting is handled in the StartBackoffNow
