@@ -14,6 +14,9 @@ using namespace std;
 using namespace ns3;
 
 
+static int waitingWindow = 16;
+static int priorityWindow = 8;
+
 /// Run single experiment with enabled or disabled RTS/CTS mechanism
 double experiment (bool enableCtsRts, double radius, int dataRateBPS, int simulationTime, int packetSize)
 {
