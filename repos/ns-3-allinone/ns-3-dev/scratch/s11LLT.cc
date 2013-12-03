@@ -10,7 +10,7 @@
 
 using namespace ns3;
 
-static int waitingWindow = 16;
+static int waitingWindow = 32;
 static int priorityWindow = 8;
 
 /// Run single 10 seconds experiment with enabled or disabled RTS/CTS mechanism
@@ -165,7 +165,7 @@ int main (int argc, char **argv)
 
   std::cout << "RTS/CTS enabled:\n";
 
-  experiment (true,3000000, 50,1000);
+  experiment (true,3000000, 300,1000);
    
 
   return 0;
