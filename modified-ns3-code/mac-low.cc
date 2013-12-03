@@ -285,6 +285,12 @@ private:
 
 
 //Lee's modification starts ========================================================
+void MacLow::SetUsingLLTAlgo(bool enable, int numWaitingTimeSlot){
+    waitingWindowSlot = numWaitingTimeSlot;
+    uint64_t nanoSeconds = numWaitingTimeSlot * MacLow::GetSlotTime().GetNanoSeconds();
+    SetUsingLLTAlgo(enable, NanoSeconds(nanoSeconds));
+}
+
 void MacLow::SetUsingLLTAlgo(bool enable, Time waitingWindowTime){
   usingLLTBasedAlgo = enable;
   waitingWindow = waitingWindowTime;
@@ -706,7 +712,7 @@ MacLow::ReceiveOk (Ptr<Packet> packet, double rxSnr, WifiMode txMode, WifiPreamb
     {
 //Lee's modification starts ========================================================
         if (usingLLTBasedAlgo) {
-            CheckIsEarliest();
+            MacLow::CheckAlreadyWaited();
                 if(alreadyWaited){
                          if (isPrevNavZero
                                 && hdr.GetAddr1 () == m_self)
@@ -727,6 +733,7 @@ MacLow::ReceiveOk (Ptr<Packet> packet, double rxSnr, WifiMode txMode, WifiPreamb
                           NS_LOG_DEBUG ("rx RTS from=" << hdr.GetAddr2 () << ", cannot schedule CTS");
                         }
                 }else{
+                        CheckIsEarliest();
                         //start waiting
                         //only sent to the earliest LLT
                         if(curEarliestLLTAddress == hdr.GetAddr2 ()){

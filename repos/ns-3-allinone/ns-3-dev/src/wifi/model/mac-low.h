@@ -406,11 +406,11 @@ class MacLow : public Object
 {
 public:
 //Lee's modification starts ========================================================
-  void SetUsingLLTAlgo(bool enable){usingLLTBasedAlgo = enable;}
-  void SetUsingLLTAlgo(bool enable, Time waitingWindowTime);
+  void SetUsingLLTAlgo(bool enable, int numWaitingTimeSlot);
   std::map <Mac48Address, int64_t> * GetLLTMap(){return &LLTmap;}
   bool GetIsEarliest(){return isEarliestLLT;}
-  void SetAlreadyWaited(bool it_alreadyWaited){alreadyWaited = it_alreadyWaited;}
+  bool GetAlreadyWaited(){return alreadyWaited;}
+  int  GetWaitingWindowSlots(){return waitingWindowSlot;}
   
   void CheckAlreadyWaited();
 
@@ -558,6 +558,7 @@ private:
   bool isEarliestLLT;
   bool alreadyWaited;
   
+  int waitingWindowSlot;
   Time waitingWindow;
   Time LLTfinished;
 
@@ -566,6 +567,7 @@ private:
   timespec * tspec;
   Mac48Address curEarliestLLTAddress;
 
+  void SetUsingLLTAlgo(bool enable, Time waitingWindowTime);
 //Lee's modification ends ==========================================================
 
 

@@ -159,7 +159,7 @@ double  normalizedTotalCarriedload_xaxis(double dataRateBPS){
 }
 
 void outputSimulationParameter(double radius, int dataRateBPS, int simulationTime, int packetSize){
-	std::cout << "Node Distance(M): "<< ((int)radius) << "; DataRate(BPS): " <<dataRateBPS << "; Time: " <<simulationTime<<"; Packet size: "<<packetSize;
+	std::cout << "Node Distance(M): "<< ((int)radius) << "; DataRate(BPS): " <<dataRateBPS << "; Time: " <<simulationTime<<"; Packet size: "<<packetSize<< "\n";
 }
 
 int main (int argc, char **argv)
@@ -170,7 +170,7 @@ int main (int argc, char **argv)
   int dataRateList[10]  = {1000,10000,50000,100000,250000,500000,1000000,3000000,6000000,12000000};
   SeedManager::SetRun (3);  // Changes run number from default of 1 to 7
   
-  for(int i = 0; i < 10; i++){
+  for(int i = 3; i < 5; i++){
   	dataRate = dataRateList[i];
 	  //std::cout << "RTS/CTS disabled:\n" << std::flush;
 	  outputSimulationParameter(80, dataRate, 50,1000);
