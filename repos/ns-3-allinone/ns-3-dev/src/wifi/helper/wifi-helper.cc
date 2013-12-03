@@ -123,7 +123,7 @@ WifiHelper::Install (const WifiPhyHelper &phyHelper,
 
 //Lee's modification starts ========================================================
 NetDeviceContainer 
-WifiHelper::InstallLLT (const WifiPhyHelper &phyHelper,
+WifiHelper::InstallLLTGeneral (const WifiPhyHelper &phyHelper,
                      const WifiMacHelper &macHelper, NodeContainer c, int waitingWindow, int priorityWindow) const
 {
   NetDeviceContainer devices;
@@ -146,6 +146,41 @@ WifiHelper::InstallLLT (const WifiPhyHelper &phyHelper,
       node->AddDevice (device);
       devices.Add (device);
       NS_LOG_DEBUG ("node=" << node << ", mob=" << node->GetObject<MobilityModel> ());
+   }
+  return devices;
+}
+
+NetDeviceContainer 
+WifiHelper::InstallLLT (const WifiPhyHelper &phyHelper,
+                     const WifiMacHelper &macHelper, NodeContainer c, int waitingWindow, int priorityWindow) const
+{
+  int cnt = 0;
+  NetDeviceContainer devices;
+  for (NodeContainer::Iterator i = c.Begin (); i != c.End (); ++i)
+    {
+      Ptr<Node> node = *i;
+      Ptr<WifiNetDevice> device = CreateObject<WifiNetDevice> ();
+      Ptr<WifiRemoteStationManager> manager = m_stationManager.Create<WifiRemoteStationManager> ();
+
+      Ptr<WifiMac> mac = macHelper.Create ();
+      Ptr<WifiPhy> phy = phyHelper.Create (node, device);
+      mac->SetAddress (Mac48Address::Allocate ());
+      mac->ConfigureStandard (m_standard);
+
+      if(cnt ==0 || cnt == 2){
+         mac->EnableLLTAlgo(waitingWindow, priorityWindow, 2);
+      }else if(cnt == 1 || cnt == 3){
+         mac->EnableLLTAlgo(waitingWindow, priorityWindow, 1);
+      }
+
+      phy->ConfigureStandard (m_standard);
+      device->SetMac (mac);
+      device->SetPhy (phy);
+      device->SetRemoteStationManager (manager);
+      node->AddDevice (device);
+      devices.Add (device);
+      NS_LOG_DEBUG ("node=" << node << ", mob=" << node->GetObject<MobilityModel> ());
+      cnt++;
    }
   return devices;
 }
