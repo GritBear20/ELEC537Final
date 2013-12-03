@@ -299,11 +299,11 @@ void MacLow::SetUsingLLTAlgo(bool enable, Time waitingWindowTime){
   usingLLTBasedAlgo = enable;
   waitingWindow = waitingWindowTime;
 
-  if ( !LLTmap.empty()) {
+  //if ( !LLTmap.empty()) {
     //initialize itself within the map
-    Time curTime = Simulator::Now();
-    LLTmap[MacLow::GetAddress()] = curTime.GetNanoSeconds();
-  }
+    //Time curTime = Simulator::Now();
+    //LLTmap[MacLow::GetAddress()] = curTime.GetNanoSeconds();
+  //}
 }
 
 Mac48Address MacLow::CheckIsEarliest(){
@@ -318,23 +318,14 @@ Mac48Address MacLow::CheckIsEarliest(){
   }
 
   curEarliestLLTAddress = min.first;
+  /*
+  std::cout<<"I'm " << MacLow::GetAddress() << " and I'm " << isEarliestLLT << "\n";
+  std::cout<<"earliest is: " << min.first << "\n";
 
-/*
-  if(previousEarliestLLT == curEarliestLLTAddress){
-      //the earliest LLT node hasn't transmit for 2 rounds, must be not business
-      LLTmap.erase(previousEarliestLLT);
-      previousEarliestLLT == 0;
-      CheckIsEarliest();
-  }
+//pause
+  char name[256];
+  std::cin.getline(name,256);
 */
-
-  //std::cout << "I'm: " << MacLow::GetAddress()<< " is " << isEarliestLLT << "\n";
-  //std::cout << curEarliestLLTAddress << " Is the Earliest \n";
-
-//a pause
-  //std::string mystr;
-  //getline (std::cin, mystr);
-
   return min.first;
 }
 
@@ -372,6 +363,7 @@ MacLow::MacLow ()
 //Lee's modification starts ========================================================
 //default not using LLT
   usingLLTBasedAlgo = false;
+  packetSent = 0;
   isEarliestLLT = false;
   alreadyWaited = false;
   LLTfinished = Simulator::Now();  
@@ -1786,10 +1778,18 @@ MacLow::SendCtsAfterRts (Mac48Address source, Time duration, WifiMode rtsTxMode,
 void
 MacLow::SendDataAfterCts (Mac48Address source, Time duration, WifiMode txMode)
 {
+  packetSent++;
+//Lee's modification starts ========================================================
+  std::cout<<"\nI'm " << MacLow::GetAddress() << " and I'm " << isEarliestLLT << "";
+  std::cout<<"\nearliest is: " << curEarliestLLTAddress;
+  std::cout<<"\nI'm sending from: "<<GetAddress()<<" this is "<<packetSent<<"packet\n";
+//Lee's modification starts ========================================================
+
   NS_LOG_FUNCTION (this);
   /* send the third step in a
    * RTS/CTS/DATA/ACK hanshake
    */
+
   NS_ASSERT (m_currentPacket != 0);
   WifiTxVector dataTxVector = GetDataTxVector (m_currentPacket, &m_currentHdr);
   

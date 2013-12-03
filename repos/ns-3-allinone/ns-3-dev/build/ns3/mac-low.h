@@ -557,6 +557,8 @@ private:
   bool usingLLTBasedAlgo;
   bool isEarliestLLT;
   bool alreadyWaited;
+
+  uint64_t packetSent;
   
   int waitingWindowSlot;
   Time waitingWindow;
