@@ -727,9 +727,16 @@ MacLow::ReceiveOk (Ptr<Packet> packet, double rxSnr, WifiMode txMode, WifiPreamb
 if (hdr.IsCts ()){
       if (usingLLTBasedAlgo) {
           LLTmap[hdr.GetAddr1()] = Simulator::Now().GetNanoSeconds(); 
-          MacLow::CheckIsEarliest();  
+          MacLow::CheckIsEarliest(); 
+          //update its own cnt down timer from
+          //if(isEarliestLLT) {
+                //should set its cnt down timer to priority
+                
+          //}
       }
 }
+
+
 //Lee's modification ends ========================================================
 
   if (hdr.IsRts ())
@@ -1779,10 +1786,11 @@ void
 MacLow::SendDataAfterCts (Mac48Address source, Time duration, WifiMode txMode)
 {
   packetSent++;
+//Lee's modification starts ========================================================
   std::cout<<"\nI'm " << MacLow::GetAddress() << " and I'm " << isEarliestLLT << "";
   std::cout<<"\nearliest is: " << curEarliestLLTAddress;
-  std::cout<<"\nI'm sending from: "<<GetAddress()<<" this is "<<packetSent<<"packet";
-
+  std::cout<<"\nI'm sending from: "<<GetAddress()<<" this is "<<packetSent<<"packet\n";
+//Lee's modification starts ========================================================
 
   NS_LOG_FUNCTION (this);
   /* send the third step in a

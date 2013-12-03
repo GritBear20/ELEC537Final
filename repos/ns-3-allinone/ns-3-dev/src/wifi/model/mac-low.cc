@@ -1779,10 +1779,11 @@ void
 MacLow::SendDataAfterCts (Mac48Address source, Time duration, WifiMode txMode)
 {
   packetSent++;
+//Lee's modification starts ========================================================
   std::cout<<"\nI'm " << MacLow::GetAddress() << " and I'm " << isEarliestLLT << "";
   std::cout<<"\nearliest is: " << curEarliestLLTAddress;
-  std::cout<<"\nI'm sending from: "<<GetAddress()<<" this is "<<packetSent<<"packet";
-
+  std::cout<<"\nI'm sending from: "<<GetAddress()<<" this is "<<packetSent<<"packet\n";
+//Lee's modification starts ========================================================
 
   NS_LOG_FUNCTION (this);
   /* send the third step in a
