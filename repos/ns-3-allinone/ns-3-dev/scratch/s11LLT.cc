@@ -10,9 +10,9 @@
 
 using namespace ns3;
 int waitingWindow = 16;
-int priorityWindow = 8;
+ int priorityWindow = 8;
 /// Run single 10 seconds experiment with enabled or disabled RTS/CTS mechanism
-void experiment (bool enableCtsRts,int simulationTime, int packetSize)
+void experiment (bool enableCtsRts,int dataRateBPS,int simulationTime, int packetSize)
 {
   // 0. Enable or disable CTS/RTS
   UintegerValue ctsThr = (enableCtsRts ? UintegerValue (100) : UintegerValue (2200));
@@ -139,10 +139,8 @@ void experiment (bool enableCtsRts,int simulationTime, int packetSize)
   monitor->CheckForLostPackets ();
   Ptr<Ipv4FlowClassifier> classifier = DynamicCast<Ipv4FlowClassifier> (flowmon.GetClassifier ());
   std::map<FlowId, FlowMonitor::FlowStats> stats = monitor->GetFlowStats ();
-   double normalThroughtput;
   for (std::map<FlowId, FlowMonitor::FlowStats>::const_iterator i = stats.begin (); i != stats.end (); ++i)
     {
-
       // first 2 FlowIds are for ECHO apps, we don't want to display them
       if (i->first > 2)
         {
@@ -150,15 +148,10 @@ void experiment (bool enableCtsRts,int simulationTime, int packetSize)
           std::cout << "Flow " << i->first - 2 << " (" << t.sourceAddress << " -> " << t.destinationAddress << ")\n";
           std::cout << "  Tx Bytes:   " << i->second.txBytes << "\n";
           std::cout << "  Rx Bytes:   " << i->second.rxBytes << "\n";
-	  normalThroughtput = (double)(i->second.rxBytes * 8.0 / (double)simulationTime / 1000.0 / 1000.0)/2.0;
-          std::cout << "  Throughput: " <<  normalThroughtput << " Mbps\n";
-	          
-	 
-          
+          std::cout << "  Throughput: " << i->second.rxBytes * 8.0 / 10.0 / 1000 / 1000  << " Mbps\n";
         }
-	
     }
-  
+
   // 11. Cleanup
   Simulator::Destroy ();
   
@@ -168,9 +161,11 @@ void experiment (bool enableCtsRts,int simulationTime, int packetSize)
 int main (int argc, char **argv)
 {
   
-  
-  SeedManager::SetRun (3);  // Changes run number from default of 1 to 7
-	   experiment (true,20,1000);
-	
+
+  std::cout << "RTS/CTS enabled:\n";
+
+  experiment (true,3000000, 50,1000);
+   
+
   return 0;
 }
