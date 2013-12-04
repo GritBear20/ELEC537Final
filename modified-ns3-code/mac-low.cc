@@ -747,7 +747,13 @@ if (hdr.IsCts ()){
                 //should set its cnt down timer to priority
                 
           //}
+        if (hdr.GetAddr1 () != m_self){
+
+             Ptr<ns3::Timer> tdelay = new Timer();
+             tdelay->Schedule(hdr.GetDuration());
+        }
       }
+        
 }
 
 if (hdr.IsData() && usingLLTBasedAlgo){
