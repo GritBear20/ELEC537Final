@@ -9,7 +9,7 @@
 #include "ns3/wifi-module.h"
 
 using namespace ns3;
-int waitingWindow = 16;
+int waitingWindow = 32;
  int priorityWindow = 8;
 /// Run single 10 seconds experiment with enabled or disabled RTS/CTS mechanism
 void experiment (bool enableCtsRts,int simulationTime, int packetSize)
