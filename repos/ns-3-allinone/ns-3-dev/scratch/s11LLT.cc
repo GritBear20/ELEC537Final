@@ -9,10 +9,8 @@
 #include "ns3/wifi-module.h"
 
 using namespace ns3;
-
-static int waitingWindow = 32;
-static int priorityWindow = 8;
-
+int waitingWindow = 16;
+ int priorityWindow = 8;
 /// Run single 10 seconds experiment with enabled or disabled RTS/CTS mechanism
 void experiment (bool enableCtsRts,int dataRateBPS,int simulationTime, int packetSize)
 {
@@ -60,6 +58,7 @@ void experiment (bool enableCtsRts,int dataRateBPS,int simulationTime, int packe
   NqosWifiMacHelper wifiMac = NqosWifiMacHelper::Default ();
   wifiMac.SetType ("ns3::AdhocWifiMac"); // use ad-hoc MAC
   NetDeviceContainer devices = wifi.InstallLLT (wifiPhy, wifiMac, nodes, waitingWindow, priorityWindow);
+
 
   // uncomment the following to have athstats output
   // AthstatsHelper athstats;
@@ -165,7 +164,7 @@ int main (int argc, char **argv)
 
   std::cout << "RTS/CTS enabled:\n";
 
-  experiment (true,3000000, 300,1000);
+  experiment (true,3000000, 50,1000);
    
 
   return 0;

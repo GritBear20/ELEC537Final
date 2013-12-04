@@ -162,7 +162,7 @@ int main (int argc, char **argv)
 
   std::cout << "RTS/CTS enabled:\n";
 
-  experiment (true,3000000, 300,1000);
+  experiment (true,3000000, 50,1000);
    
 
   return 0;
