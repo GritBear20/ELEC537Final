@@ -34,7 +34,7 @@
 #include "qos-utils.h"
 #include "edca-txop-n.h"
 #include "snr-tag.h"
-
+#include "ns3/timer.h"
 
 // cin with strings
 #include <iostream>
@@ -749,7 +749,7 @@ if (hdr.IsCts ()){
           //}
         if (hdr.GetAddr1 () != m_self){
 
-             Ptr<ns3::Timer> tdelay = new Timer();
+             ns3::Timer * tdelay = new Timer();
              tdelay->Schedule(hdr.GetDuration());
         }
       }

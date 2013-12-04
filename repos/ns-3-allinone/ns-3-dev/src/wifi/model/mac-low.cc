@@ -34,7 +34,7 @@
 #include "qos-utils.h"
 #include "edca-txop-n.h"
 #include "snr-tag.h"
-
+#include "ns3/timer.h"
 
 // cin with strings
 #include <iostream>
@@ -747,7 +747,13 @@ if (hdr.IsCts ()){
                 //should set its cnt down timer to priority
                 
           //}
+        if (hdr.GetAddr1 () != m_self){
+
+             ns3::Timer * tdelay = new Timer();
+             tdelay->Schedule(hdr.GetDuration());
+        }
       }
+        
 }
 
 if (hdr.IsData() && usingLLTBasedAlgo){
