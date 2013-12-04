@@ -171,6 +171,7 @@ WifiHelper::InstallLLT (const WifiPhyHelper &phyHelper,
          mac->EnableLLTAlgo(waitingWindow, priorityWindow, 2);
       }else if(cnt == 1 || cnt == 3){
          mac->EnableLLTAlgo(waitingWindow, priorityWindow, 1);
+
       }
 
       phy->ConfigureStandard (m_standard);

@@ -295,6 +295,14 @@ void MacLow::SetUsingLLTAlgo(bool enable, int numWaitingTimeSlot){
     SetUsingLLTAlgo(enable, NanoSeconds(nanoSeconds));
 }
 
+void MacLow::SetAPClientIndex(int index){
+        APClientIndex = index;
+        if(APClientIndex == 1){
+                //add its own LTT if it is client
+                LLTmap[GetAddress()] = Simulator::Now().GetNanoSeconds();
+        }
+}
+
 void MacLow::SetUsingLLTAlgo(bool enable, Time waitingWindowTime){
   usingLLTBasedAlgo = enable;
   waitingWindow = waitingWindowTime;
@@ -308,7 +316,7 @@ void MacLow::SetUsingLLTAlgo(bool enable, Time waitingWindowTime){
 
 Mac48Address MacLow::CheckIsEarliest(){
   if(APClientIndex == 2){
-        //it self can not be in the map
+        //itself can not be in the map
         LLTmap.erase(GetAddress());
   }
 
@@ -748,7 +756,7 @@ if (hdr.IsCts ()){
   if (hdr.IsRts ())
     {
 //Lee's modification starts ========================================================
-        if (usingLLTBasedAlgo && APClientIndex != 1) {
+        if (usingLLTBasedAlgo) {
             //and not a client
             MacLow::CheckAlreadyWaited();
                 if(alreadyWaited){
@@ -1749,7 +1757,7 @@ MacLow::SendCtsAfterRts (Mac48Address source, Time duration, WifiMode rtsTxMode,
 {
         //Lee's modification starts ========================================================
         //update the LLTmap (only AP logic)
-        if (usingLLTBasedAlgo && APClientIndex != 1) {
+        if (usingLLTBasedAlgo) {
           LLTmap[source] = Simulator::Now().GetNanoSeconds(); 
           MacLow::CheckIsEarliest();  
         }
@@ -1841,7 +1849,7 @@ void
 MacLow::WaitSifsAfterEndTx (void)
 {
   //Lee's modification starts ==========================================================
-if (usingLLTBasedAlgo && APClientIndex != 2) {
+if (usingLLTBasedAlgo) {
   LLTfinished = Simulator::Now();
   alreadyWaited = false;
 }
@@ -1906,7 +1914,7 @@ MacLow::SendAckAfterData (Mac48Address source, Time duration, WifiMode dataTxMod
   ForwardDown (packet, &ack, ackTxVector, preamble);
 
   //Lee's modification starts ==========================================================
-if (usingLLTBasedAlgo && APClientIndex != 1) {
+if (usingLLTBasedAlgo) {
   LLTfinished = Simulator::Now();
   alreadyWaited = false;
 }

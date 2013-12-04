@@ -411,8 +411,13 @@ public:
   bool GetIsEarliest(){return isEarliestLLT;}
   bool GetAlreadyWaited(){return alreadyWaited;}
   int  GetWaitingWindowSlots(){return waitingWindowSlot;}
-//0 means both, 1 means client, 2 means AP
-  void SetAPClientIndex(int index){APClientIndex = index;}
+//0 means no differentiation, 1 means client, 2 means AP
+  void SetAPClientIndex(int index){APClientIndex = index;
+        if(APClientIndex == 2){
+                //add its own LTT
+                LLTmap[GetAddress()] = Simulator::Now().GetNanoSeconds();
+        }
+        }
   void CheckAlreadyWaited();
 
   Mac48Address CheckIsEarliest();

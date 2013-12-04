@@ -44,6 +44,7 @@ void RegularWifiMac::EnableLLTAlgo(int waitingWindow, int prioritySlots, int APC
     m_dcfManager->SetUsingLLTAlgo(true, prioritySlots);
     m_low->SetUsingLLTAlgo(true, waitingWindow);
     m_low->SetAPClientIndex(APClientIndex);
+
 }
 
 void RegularWifiMac::DisableLLTAlgo(){

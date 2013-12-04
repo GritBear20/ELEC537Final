@@ -412,7 +412,7 @@ public:
   bool GetAlreadyWaited(){return alreadyWaited;}
   int  GetWaitingWindowSlots(){return waitingWindowSlot;}
 //0 means no differentiation, 1 means client, 2 means AP
-  void SetAPClientIndex(int index){APClientIndex = index;}
+  void SetAPClientIndex(int index);
   void CheckAlreadyWaited();
 
   Mac48Address CheckIsEarliest();
