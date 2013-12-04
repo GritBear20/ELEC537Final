@@ -307,6 +307,11 @@ void MacLow::SetUsingLLTAlgo(bool enable, Time waitingWindowTime){
 }
 
 Mac48Address MacLow::CheckIsEarliest(){
+  if(APClientIndex == 2){
+        //it self can not be in the map
+        LLTmap.erase(GetAddress());
+  }
+
   //check if the time of itself is the lowest
   std::pair<Mac48Address, int64_t> min 
       = *std::min_element(LLTmap.begin(), LLTmap.end(), CompareSecond());
@@ -364,6 +369,7 @@ MacLow::MacLow ()
 //default not using LLT
   usingLLTBasedAlgo = false;
   packetSent = 0;
+  APClientIndex = 0;
   isEarliestLLT = false;
   alreadyWaited = false;
   LLTfinished = Simulator::Now();  
@@ -742,7 +748,8 @@ if (hdr.IsCts ()){
   if (hdr.IsRts ())
     {
 //Lee's modification starts ========================================================
-        if (usingLLTBasedAlgo) {
+        if (usingLLTBasedAlgo && APClientIndex != 1) {
+            //and not a client
             MacLow::CheckAlreadyWaited();
                 if(alreadyWaited){
                          if (isPrevNavZero
@@ -1741,8 +1748,8 @@ void
 MacLow::SendCtsAfterRts (Mac48Address source, Time duration, WifiMode rtsTxMode, double rtsSnr)
 {
         //Lee's modification starts ========================================================
-        //update the LLTmap
-        if (usingLLTBasedAlgo) {
+        //update the LLTmap (only AP logic)
+        if (usingLLTBasedAlgo && APClientIndex != 1) {
           LLTmap[source] = Simulator::Now().GetNanoSeconds(); 
           MacLow::CheckIsEarliest();  
         }
@@ -1834,7 +1841,7 @@ void
 MacLow::WaitSifsAfterEndTx (void)
 {
   //Lee's modification starts ==========================================================
-if (usingLLTBasedAlgo) {
+if (usingLLTBasedAlgo && APClientIndex != 2) {
   LLTfinished = Simulator::Now();
   alreadyWaited = false;
 }
@@ -1899,7 +1906,7 @@ MacLow::SendAckAfterData (Mac48Address source, Time duration, WifiMode dataTxMod
   ForwardDown (packet, &ack, ackTxVector, preamble);
 
   //Lee's modification starts ==========================================================
-if (usingLLTBasedAlgo) {
+if (usingLLTBasedAlgo && APClientIndex != 1) {
   LLTfinished = Simulator::Now();
   alreadyWaited = false;
 }

@@ -411,7 +411,8 @@ public:
   bool GetIsEarliest(){return isEarliestLLT;}
   bool GetAlreadyWaited(){return alreadyWaited;}
   int  GetWaitingWindowSlots(){return waitingWindowSlot;}
-  
+//0 means no differentiation, 1 means client, 2 means AP
+  void SetAPClientIndex(int index){APClientIndex = index;}
   void CheckAlreadyWaited();
 
   Mac48Address CheckIsEarliest();
@@ -557,6 +558,7 @@ private:
   bool usingLLTBasedAlgo;
   bool isEarliestLLT;
   bool alreadyWaited;
+  int APClientIndex;
 
   uint64_t packetSent;
   

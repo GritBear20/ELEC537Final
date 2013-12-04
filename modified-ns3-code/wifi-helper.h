@@ -145,6 +145,9 @@ public:
 
 
 //Lee's modification starts ========================================================
+  NetDeviceContainer InstallLLTGeneral (const WifiPhyHelper &phyHelper,
+                     const WifiMacHelper &macHelper, NodeContainer c, int waitingWindow, int priorityWindow) const;
+
   NetDeviceContainer InstallLLT (const WifiPhyHelper &phyHelper,
                      const WifiMacHelper &macHelper, NodeContainer c, int waitingWindow, int priorityWindow) const;
 //Lee's modification ends =========================================================

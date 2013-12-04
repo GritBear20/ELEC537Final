@@ -39,10 +39,11 @@ NS_LOG_COMPONENT_DEFINE ("RegularWifiMac");
 namespace ns3 {
 
 //Lee's modification starts ========================================================
-void RegularWifiMac::EnableLLTAlgo(int waitingWindow, int prioritySlots){
+void RegularWifiMac::EnableLLTAlgo(int waitingWindow, int prioritySlots, int APClientIndex){
     //set dcf-manager and mac-low LLT algo to true
     m_dcfManager->SetUsingLLTAlgo(true, prioritySlots);
     m_low->SetUsingLLTAlgo(true, waitingWindow);
+    m_low->SetAPClientIndex(APClientIndex);
 }
 
 void RegularWifiMac::DisableLLTAlgo(){

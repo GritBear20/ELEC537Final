@@ -58,7 +58,7 @@ class RegularWifiMac : public WifiMac
 public:
 //Lee's modification starts ========================================================
 //override the WifiMac method
-  void EnableLLTAlgo(int waitingWindow, int prioritySlots);
+  void EnableLLTAlgo(int waitingWindow, int prioritySlots, int APClientIndex = 0);
   void DisableLLTAlgo();
 //Lee's modification ends =========================================================
 

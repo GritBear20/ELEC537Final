@@ -45,7 +45,7 @@ class WifiMac : public Object
 {
 public:
 //Lee's modification starts ========================================================
-  virtual void EnableLLTAlgo(int waitingWindow, int prioritySlots) = 0;
+  virtual void EnableLLTAlgo(int waitingWindow, int prioritySlots, int APClientIndex = 0) = 0;
   virtual void DisableLLTAlgo() = 0;
 //Lee's modification ends =========================================================
 
