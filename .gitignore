@@ -4,6 +4,8 @@
 *.o
 *.i
 *.pyc
+.wafpickle*
+
 
 # Compiled Dynamic libraries
 *.so

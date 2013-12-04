@@ -750,6 +750,12 @@ if (hdr.IsCts ()){
       }
 }
 
+if (hdr.IsData() && usingLLTBasedAlgo){
+        if(hdr.GetAddr1() != Mac48Address ("ff:ff:ff:ff:ff:ff")){
+                LLTmap[hdr.GetAddr1()] = Simulator::Now().GetNanoSeconds(); 
+                MacLow::CheckIsEarliest();
+        }
+}
 
 //Lee's modification ends ========================================================
 
@@ -1008,6 +1014,7 @@ if (hdr.IsCts ()){
         }
       else if (hdr.IsData () || hdr.IsMgt ())
         {
+
           NS_LOG_DEBUG ("rx unicast/sendAck from=" << hdr.GetAddr2 ());
           NS_ASSERT (m_sendAckEvent.IsExpired ());
           m_sendAckEvent = Simulator::Schedule (GetSifs (),

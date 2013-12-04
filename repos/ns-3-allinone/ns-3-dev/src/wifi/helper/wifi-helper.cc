@@ -167,12 +167,7 @@ WifiHelper::InstallLLT (const WifiPhyHelper &phyHelper,
       mac->SetAddress (Mac48Address::Allocate ());
       mac->ConfigureStandard (m_standard);
 
-      if(cnt ==0 || cnt == 2){
-         mac->EnableLLTAlgo(waitingWindow, priorityWindow, 2);
-      }else if(cnt == 1 || cnt == 3){
-         mac->EnableLLTAlgo(waitingWindow, priorityWindow, 1);
 
-      }
 
       phy->ConfigureStandard (m_standard);
       device->SetMac (mac);
@@ -180,6 +175,14 @@ WifiHelper::InstallLLT (const WifiPhyHelper &phyHelper,
       device->SetRemoteStationManager (manager);
       node->AddDevice (device);
       devices.Add (device);
+        
+      if(cnt ==0 || cnt == 2){
+         mac->EnableLLTAlgo(waitingWindow, priorityWindow, 2);
+      }else if(cnt == 1 || cnt == 3){
+         mac->EnableLLTAlgo(waitingWindow, priorityWindow, 1);
+
+      }
+
       NS_LOG_DEBUG ("node=" << node << ", mob=" << node->GetObject<MobilityModel> ());
       cnt++;
    }
